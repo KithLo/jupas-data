@@ -1,0 +1,17 @@
+export enum StudyArea {
+    Arts = "Arts",
+    Building = "Building",
+    Business = "Business",
+    Communication = "Communication",
+    Computing = "Computing",
+    Design = "Design",
+    Education = "Education",
+    Engineering = "Engineering",
+    Law = "Law",
+    Medicine = "Medicine",
+    Music = "Music",
+    Philosophy = "Philosophy",
+    Science = "Science",
+    SocialSciences = "SocialSciences",
+    SocialWork = "SocialWork",
+}

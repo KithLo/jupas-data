@@ -1,0 +1,76 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - year/*
+  pull_request:
+    branches:
+      - year/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - name: Extract branch name
+        shell: sh
+        run: echo "year=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/year/}}" >> $GITHUB_OUTPUT
+        id: extract_year
+
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        shell: sh
+        run: |
+          npm install --omit=dev
+
+      - name: Test
+        shell: sh
+        run: |
+          npm run test
+
+      - name: Build
+        shell: sh
+        run: |
+          npm run build
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          clean: false
+
+      - name: Push to pages
+        shell: sh
+        run: |
+          mkdir -p "./build"
+          rm -rf "./build/$YEAR"
+          mkdir -p "./build/$YEAR"
+          mv ./dist/* "./build/$YEAR"
+          if [ "$YEAR" = "$LATEST_YEAR" ]
+          then
+          rm -rf "./build/latest"
+          cp -R "./build/$YEAR" "./build/latest"
+          fi
+          if [ -n "$(git status --porcelain)" ]
+          then
+          git config user.name "$(git log -1 --pretty=format:'%an')"
+          git config user.email "$(git log -1 --pretty=format:'%ae')"
+          git add .
+          git commit -m "update"
+          git push origin gh-pages
+          fi
+        env:
+          YEAR: ${{ steps.extract_year.outputs.year }}
+          LATEST_YEAR: ${{ vars.LATEST_YEAR }}
