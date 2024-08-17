@@ -1,4 +1,7 @@
-*
+/*
 !.gitignore
 !README.md
 !LICENSE.txt
+!.github
+.github/*
+!.github/ISSUE_TEMPLATE
