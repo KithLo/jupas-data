@@ -3,9 +3,9 @@ import {
     aplChinese,
     categoryASubjects,
     categoryBSubjects,
-    categoryCSubjects,
     conflictingSubjects,
     passFailSubjects,
+    Subject,
 } from "./subjects"
 import { Grade, SubjectGrades } from "./types"
 
@@ -23,8 +23,16 @@ export const grades: Grade[] = [
         grades: ["D", "A", "U"],
     },
     {
-        subjects: categoryCSubjects,
-        grades: ["A", "B", "C", "D", "E", "U"],
+        subjects: [Subject.French, Subject.German, Subject.Spanish],
+        grades: ["C2", "C1", "B2", "B1", "A2"],
+    },
+    {
+        subjects: [Subject.Japanese],
+        grades: ["N1", "N2", "N3"],
+    },
+    {
+        subjects: [Subject.Korean],
+        grades: ["G6", "G5", "G4", "G3"],
     },
     {
         subjects: passFailSubjects,

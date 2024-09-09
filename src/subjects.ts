@@ -88,6 +88,8 @@ export enum Subject {
     Apl720 = "Apl720",
     /** Data Application for Business */
     Apl693 = "Apl693",
+    /** Introduction to Fintech (new in 2025) */
+    Apl730 = "Apl730",
     /** Marketing and Online Promotion */
     Apl681 = "Apl681",
     /** Law Enforcement in Hong Kong */
@@ -130,6 +132,8 @@ export enum Subject {
     Apl674 = "Apl674",
     /** Exercise Science and Health Fitness */
     Apl627 = "Apl627",
+    /** Digital Construction */
+    Apl727 = "Apl727",
     /** Electrical and Energy Engineering */
     Apl683 = "Apl683",
     /** AI and Robotics */
@@ -150,6 +154,14 @@ export enum Subject {
     Apl723 = "Apl723",
     /** English for Service Professionals */
     Apl716 = "Apl716",
+    /** Creative English – Biz and Media (new in 2025) */
+    Apl728 = "Apl728",
+    /** Creative English – PR and Marketing (new in 2025) */
+    Apl729 = "Apl729",
+    /** Applied Japanese and Japanese Culture (new in 2025) */
+    Apl731 = "Apl731",
+    /** Everyday Japanese and Japanese Culture (new in 2025) */
+    Apl732 = "Apl732",
     /** Chinese in Business Service */
     Apl695 = "Apl695",
     /** Chinese in Practical Context */
@@ -164,10 +176,9 @@ export enum Subject {
     // Other languages subjects
     French = "French",
     German = "German",
-    Hindi = "Hindi",
     Japanese = "Japanese",
+    Korean = "Korean",
     Spanish = "Spanish",
-    Urdu = "Urdu",
 }
 
 export const aplDesignStudies = [Subject.Apl676, Subject.Apl668, Subject.Apl717]
@@ -182,6 +193,18 @@ export const aplMediaProductionAndPublicRelations = [
     Subject.Apl718,
     Subject.Apl719,
     Subject.Apl708,
+]
+
+export const aplLanguageAndCulture = [
+    Subject.Apl715,
+    Subject.Apl723,
+    Subject.Apl716,
+    Subject.Apl728,
+    Subject.Apl729,
+    Subject.Apl726,
+    Subject.Apl731,
+    Subject.Apl732,
+    Subject.Apl725,
 ]
 
 export const aplAccountAndFinance = [Subject.Apl703]
@@ -237,15 +260,7 @@ export const aplInformationEngineering = [
 
 export const aplServicesEngineering = [Subject.Apl640, Subject.Apl698]
 
-export const aplVocationalEnglish = [
-    Subject.Apl715,
-    Subject.Apl723,
-    Subject.Apl716,
-]
-
 export const aplChinese = [Subject.Apl695, Subject.Apl700, Subject.Apl699]
-
-export const aplOthers = [Subject.Apl725, Subject.Apl726]
 
 const _coreSubjects = [
     Subject.Chi,
@@ -292,6 +307,7 @@ export const categoryBSubjects = [
     ...aplPerformingArts,
     ...aplFilmsTvAndBroadcasting,
     ...aplMediaProductionAndPublicRelations,
+    ...aplLanguageAndCulture,
     ...aplAccountAndFinance,
     ...aplBuisinessStudies,
     ...aplLegalStudies,
@@ -305,18 +321,15 @@ export const categoryBSubjects = [
     ...aplCivilElectricalAndMechanicalEngineering,
     ...aplInformationEngineering,
     ...aplServicesEngineering,
-    ...aplVocationalEnglish,
     ...aplChinese,
-    ...aplOthers,
 ]
 
 export const categoryCSubjects = [
     Subject.French,
     Subject.German,
-    Subject.Hindi,
     Subject.Japanese,
+    Subject.Korean,
     Subject.Spanish,
-    Subject.Urdu,
 ]
 
 export const passFailSubjects = [Subject.CS]

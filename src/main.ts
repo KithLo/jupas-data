@@ -12,9 +12,9 @@ export { subjects, conflictingSubjects } from "./subjects"
 export { grades, maxGrade } from "./grades"
 export { programmes } from "./programmes"
 
-export const year: string = "2024"
-export const lastYear: string | null = null
-export const hasStats: boolean = true
+export const year: string = "2025"
+export const lastYear: string | null = "2024"
+export const hasStats: boolean = false
 
 export const studyAreas = Object.values(StudyArea)
 export const institutions = Object.values(Institution)
