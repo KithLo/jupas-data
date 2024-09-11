@@ -1,4 +1,11 @@
 import { evaulate, modify, or, select, sequence } from "../calculations"
+import {
+    createMapGrades,
+    mapCatA_Normal,
+    mapCatB_430,
+    mapCatC_54321,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     aplCivilElectricalAndMechanicalEngineering,
@@ -13,6 +20,8 @@ import {
     Subject,
     categoryASubjects,
     categoryCSubjects,
+    categoryBSubjects,
+    passFailSubjects,
 } from "../subjects"
 import { Programme } from "../types"
 import {
@@ -28,6 +37,13 @@ import {
     avoid,
     discardCategoryBExcept,
 } from "../weightings"
+
+const mapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryBSubjects, mapCatB_430],
+    [categoryCSubjects, mapCatC_54321],
+    [passFailSubjects, mapPassFail],
+])
 
 const validSubjects = [...categoryASubjects, ...categoryCSubjects]
 
@@ -104,17 +120,10 @@ const r332_33_media = select(
         [Subject.Maths]: 2,
         [Subject.CS]: 1,
     }),
-    requireMultiple(
-        2,
-        or(minimumOne(validSubjects, 3), minimumOne(mediaApl, 2)),
-    ),
+    requireMultiple(2, minimumOne([...validSubjects, ...mediaApl], 3)),
 )
 
-const wMedia = sequence(
-    discardCS,
-    discardCategoryBExcept(...mediaApl),
-    scaleSubjects(mediaApl, { 3: 4, 2: 3, 1: 0 }),
-)
+const wMedia = sequence(discardCS, discardCategoryBExcept(...mediaApl))
 
 const r352_33 = select(
     minimum({
@@ -201,7 +210,7 @@ const rBioSci = select(
 const wBioSci = sequence(
     discardCS,
     discardCategoryBExcept(...bioSciApl),
-    scaleSubjects(bioSciApl, { 3: 4, 2: 0, 1: 0 }),
+    scaleSubjects(bioSciApl, { 3: 0 }),
     modify(
         multiply({
             [Subject.Eng]: 2,
@@ -222,16 +231,19 @@ const wBioSci = sequence(
 export const cityuProgrammes: Programme[] = [
     {
         id: "JS1000",
+        mapGrades,
         requirement: r334_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1001",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1002",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -241,6 +253,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1005",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -250,6 +263,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1007",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -264,6 +278,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1012",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -273,6 +288,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1013",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -282,6 +298,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1014",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -291,36 +308,43 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1017",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1018",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1019",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1025",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1026",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1027",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1041",
+        mapGrades,
         requirement: r332_33_media,
         weighting: sequence(
             wMedia,
@@ -334,6 +358,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1042",
+        mapGrades,
         requirement: r332_33_media,
         weighting: sequence(
             wMedia,
@@ -347,6 +372,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1043",
+        mapGrades,
         requirement: r332_33_media,
         weighting: sequence(
             wMedia,
@@ -361,6 +387,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1044",
+        mapGrades,
         requirement: r332_33_media,
         weighting: sequence(
             wMedia,
@@ -374,6 +401,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1051",
+        mapGrades,
         requirement: r332_33_sci,
         weighting: sequence(
             discardCS,
@@ -388,6 +416,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1052",
+        mapGrades,
         requirement: r333_33_sci,
         weighting: sequence(
             discardCS,
@@ -402,6 +431,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1061",
+        mapGrades,
         requirement: r352_33,
         weighting: sequence(
             discardCS,
@@ -411,6 +441,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1062",
+        mapGrades,
         requirement: r353_33,
         weighting: sequence(
             discardCS,
@@ -425,6 +456,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1071",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -440,6 +472,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1072",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -455,6 +488,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1074",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             discardCS,
@@ -470,6 +504,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1102",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -479,6 +514,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1103",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -498,6 +534,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1104",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -513,6 +550,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1106",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -528,6 +566,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1108",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -542,6 +581,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1109",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -558,6 +598,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1110",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -572,6 +613,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1111",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -586,6 +628,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1112",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -600,6 +643,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1113",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             discardCS,
@@ -614,11 +658,13 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1122",
+        mapGrades,
         requirement: r352_33,
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1123",
+        mapGrades,
         requirement: r352_33,
         weighting: sequence(
             discardCS,
@@ -628,6 +674,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1200",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -672,6 +719,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1201",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -700,6 +748,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1202",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -742,6 +791,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1204",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -756,6 +806,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1205",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -786,6 +837,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1206",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -826,6 +878,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1207",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -864,6 +917,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1208",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -900,6 +954,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1210",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -929,6 +984,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1211",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -961,6 +1017,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1216",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -1003,6 +1060,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1217",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -1047,6 +1105,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1220",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -1081,6 +1140,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1221",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -1095,6 +1155,7 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1801",
+        mapGrades,
         requirement: minimum({
             [Subject.Chi]: 3,
             [Subject.Eng]: 5,
@@ -1114,16 +1175,19 @@ export const cityuProgrammes: Programme[] = [
     },
     {
         id: "JS1805",
+        mapGrades,
         requirement: rBioSci,
         weighting: wBioSci,
     },
     {
         id: "JS1806",
+        mapGrades,
         requirement: rBioSci,
         weighting: wBioSci,
     },
     {
         id: "JS1807",
+        mapGrades,
         requirement: rBioSci,
         weighting: wBioSci,
     },

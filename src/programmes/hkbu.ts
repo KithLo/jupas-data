@@ -1,10 +1,18 @@
 import { difference } from "rambda"
 import { modify, or, select, sequence } from "../calculations"
+import {
+    createMapGrades,
+    mapCatA_Normal,
+    mapCatB_430,
+    mapCatC_Scaled,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
     categoryCSubjects,
+    passFailSubjects,
     Subject,
 } from "../subjects"
 import { Programme } from "../types"
@@ -15,23 +23,16 @@ import {
     discardCategoryC,
     discardCS,
     multiply,
-    scaleSubjects,
 } from "../weightings"
 
-const hkbuConfig = sequence(
-    discardCS,
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 0,
-    }),
-    scaleSubjects(categoryCSubjects, {
-        5: 7,
-        4: 5.5,
-        3: 4,
-        2: 2.5,
-    }),
-)
+const mapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryBSubjects, mapCatB_430],
+    [categoryCSubjects, mapCatC_Scaled],
+    [passFailSubjects, mapPassFail],
+])
+
+const hkbuConfig = discardCS
 
 const r332 = minimum({
     [Subject.Chi]: 3,
@@ -124,6 +125,7 @@ const js2330Apl = [
 export const hkbuProgrammes: Programme[] = [
     {
         id: "JS2020",
+        mapGrades,
         requirement: select(r332, catA3, or(catMAC3, minimumOne(js2020Apl, 2))),
         weighting: sequence(
             discardCategoryBExcept(...js2020Apl),
@@ -133,6 +135,7 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2025",
+        mapGrades,
         requirement: select(r332, catA3, or(catMAC3, minimumOne(js2025Apl, 2))),
         weighting: sequence(
             discardCategoryBExcept(...js2025Apl),
@@ -142,11 +145,13 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2060",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },
     {
         id: "JS2110",
+        mapGrades,
         requirement: select(r332, catA3, catMAB3),
         weighting: sequence(
             hkbuConfig,
@@ -156,6 +161,7 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2120",
+        mapGrades,
         requirement: select(r332, catA3, catMAB3),
         weighting: sequence(
             hkbuConfig,
@@ -165,33 +171,38 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2310",
+        mapGrades,
         requirement: select(r332, catA3, or(catMAC3, minimumOne(js2310Apl, 2))),
         weighting: sequence(
+            hkbuConfig,
             discardCategoryBExcept(...js2310Apl),
             modify(multiply({ [Subject.Chi]: 1.25, [Subject.Eng]: 1.25 })),
-            hkbuConfig,
             chooseBest(5),
         ),
     },
     {
         id: "JS2330",
+        mapGrades,
         requirement: select(r332, catA3, or(catMAC3, minimumOne(js2330Apl, 2))),
         weighting: sequence(
+            hkbuConfig,
             discardCategoryBExcept(...js2330Apl),
             modify(multiply({ [Subject.Chi]: 1.25, [Subject.Eng]: 1.25 })),
-            hkbuConfig,
             chooseBest(5),
         ),
     },
     {
         id: "JS2340",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },
     {
         id: "JS2370",
+        mapGrades,
         requirement: select(r332, catA3, or(catMAC3, minimumOne(js2370Apl, 2))),
         weighting: sequence(
+            hkbuConfig,
             discardCategoryBExcept(...js2370Apl),
             modify(
                 multiply({
@@ -200,21 +211,21 @@ export const hkbuProgrammes: Programme[] = [
                     [Subject.VA]: 1.15,
                 }),
             ),
-            hkbuConfig,
             chooseBest(5),
         ),
     },
     {
         id: "JS2410",
+        mapGrades,
         requirement: select(
             r332,
             minimumOne([Subject.Bio, Subject.Chem], 3),
             catMA3,
         ),
         weighting: sequence(
+            hkbuConfig,
             discardCategoryB,
             discardCategoryC,
-            hkbuConfig,
             modify(
                 multiply({
                     [Subject.Eng]: 1.5,
@@ -228,11 +239,12 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2420",
+        mapGrades,
         requirement: select(r332, minimumOne([Subject.Chem], 3), catMA3),
         weighting: sequence(
+            hkbuConfig,
             discardCategoryB,
             discardCategoryC,
-            hkbuConfig,
             modify(
                 multiply({
                     [Subject.Chi]: 1.5,
@@ -246,23 +258,27 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2510",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },
     {
         id: "JS2610",
+        mapGrades,
         requirement: select(r332, catA3, catMAC3),
         weighting: sequence(
-            discardCategoryB,
             hkbuConfig,
+            discardCategoryB,
             modify(multiply({ [Subject.Eng]: 2 })),
             chooseBest(5),
         ),
     },
     {
         id: "JS2620",
+        mapGrades,
         requirement: select(r332, catA3, or(catMA3, minimumOne(js2620Apl, 2))),
         weighting: sequence(
+            hkbuConfig,
             discardCategoryC,
             discardCategoryBExcept(...js2620Apl),
             modify(
@@ -272,12 +288,12 @@ export const hkbuProgrammes: Programme[] = [
                     [Subject.VA]: 1.15,
                 }),
             ),
-            hkbuConfig,
             chooseBest(5),
         ),
     },
     {
         id: "JS2660",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(
             hkbuConfig,
@@ -287,16 +303,19 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2810",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },
     {
         id: "JS2910",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },
     {
         id: "JS2920",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(
             hkbuConfig,
@@ -306,16 +325,19 @@ export const hkbuProgrammes: Programme[] = [
     },
     {
         id: "JS2930",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },
     {
         id: "JS2940",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },
     {
         id: "JS2950",
+        mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
     },

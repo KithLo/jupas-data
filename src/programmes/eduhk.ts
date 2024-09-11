@@ -1,4 +1,11 @@
 import { modify, or, select, sequence } from "../calculations"
+import {
+    createMapGrades,
+    mapCatA_Normal,
+    mapCatB_430,
+    mapCatC_76543,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
@@ -8,20 +15,27 @@ import {
     Subject,
 } from "../subjects"
 import { Programme } from "../types"
-import { chooseBest, discardCS, multiply, scaleSubjects } from "../weightings"
+import { chooseBest, discardCS, multiply } from "../weightings"
+
+const mapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryBSubjects, mapCatB_430],
+    [categoryCSubjects, mapCatC_76543],
+    [passFailSubjects, mapPassFail],
+])
 
 const eduhkCoreReq = minimum({
     [Subject.Chi]: 3,
     [Subject.Eng]: 3,
     [Subject.Maths]: 2,
-    [Subject.CS]: 1,
+    [Subject.CS]: 2,
 })
 
 const eduhkElectiveReq = or(
     minimumOne(categoryASubjects, 2),
-    minimumOne(categoryBSubjects, 2),
-    minimumOne(categoryCSubjects, 1),
-    minimumOne(passFailSubjects, 1),
+    minimumOne(categoryBSubjects, 3),
+    minimumOne(categoryCSubjects, 3),
+    minimumOne(passFailSubjects, 2),
 )
 
 const eduhkCommonReq = select(
@@ -29,29 +43,13 @@ const eduhkCommonReq = select(
     requireMultiple(2, eduhkElectiveReq),
 )
 
-const eduhkConfig = sequence(
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 0,
-    }),
-    scaleSubjects(categoryCSubjects, {
-        5: 7,
-        4: 6,
-        3: 5,
-        2: 4,
-        1: 3,
-    }),
-    scaleSubjects([Subject.CS], { 1: 2 }),
-)
-
 export const eduhkProgrammes: Programme[] = [
     {
         id: "JS8105",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Chi]: 1.5,
@@ -64,10 +62,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8222",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Eng]: 1.5,
@@ -79,11 +77,13 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8234",
+        mapGrades,
         requirement: eduhkCommonReq,
-        weighting: sequence(eduhkConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JS8246",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -101,7 +101,6 @@ export const eduhkProgrammes: Programme[] = [
         ),
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Eng]: 1.5,
@@ -117,10 +116,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8325",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.PE]: 1.5,
@@ -131,6 +130,7 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8361",
+        mapGrades,
         requirement: select(
             eduhkCoreReq,
             minimumOne(
@@ -141,7 +141,6 @@ export const eduhkProgrammes: Programme[] = [
         ),
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Maths]: 1.5,
@@ -162,10 +161,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8371",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.BAFS]: 1.2,
@@ -177,10 +176,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8381",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Hist]: 1.5,
@@ -191,10 +190,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8404",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Chi]: 1.5,
@@ -208,10 +207,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8428",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Eng]: 1.5,
@@ -223,6 +222,7 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8430",
+        mapGrades,
         requirement: select(
             eduhkCoreReq,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 4),
@@ -230,7 +230,6 @@ export const eduhkProgrammes: Programme[] = [
         ),
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Bio]: 1.5,
@@ -241,6 +240,7 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8507",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 2,
@@ -249,7 +249,6 @@ export const eduhkProgrammes: Programme[] = [
             requireMultiple(3, eduhkElectiveReq),
         ),
         weighting: sequence(
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Chi]: 1.5,
@@ -263,10 +262,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8600",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Chi]: 1.5,
@@ -278,10 +277,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8612",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Eng]: 1.5,
@@ -293,10 +292,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8636",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Music]: 1.5,
@@ -308,10 +307,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8648",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.VA]: 1.5,
@@ -322,15 +321,16 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8651",
+        mapGrades,
         requirement: eduhkCommonReq,
-        weighting: sequence(discardCS, eduhkConfig, chooseBest(5)),
+        weighting: sequence(discardCS, chooseBest(5)),
     },
     {
         id: "JS8663",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Chi]: 1.5,
@@ -342,10 +342,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8675",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Eng]: 1.5,
@@ -358,10 +358,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8687",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Chi]: 1.5,
@@ -382,6 +382,7 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8702",
+        mapGrades,
         requirement: select(
             eduhkCoreReq,
             minimumOne(
@@ -392,7 +393,6 @@ export const eduhkProgrammes: Programme[] = [
         ),
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Maths]: 1.5,
@@ -407,6 +407,7 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8714",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -429,7 +430,6 @@ export const eduhkProgrammes: Programme[] = [
         ),
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Maths]: 1.5,
@@ -449,10 +449,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8726",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Bio]: 2,
@@ -483,10 +483,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8801",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Music]: 1.5,
@@ -498,10 +498,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8813",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.VA]: 1.5,
@@ -513,10 +513,10 @@ export const eduhkProgrammes: Programme[] = [
     },
     {
         id: "JS8825",
+        mapGrades,
         requirement: eduhkCommonReq,
         weighting: sequence(
             discardCS,
-            eduhkConfig,
             modify(
                 multiply({
                     [Subject.Eng]: 1.5,

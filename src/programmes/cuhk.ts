@@ -1,7 +1,20 @@
 import { difference, omit } from "rambda"
 import { modify, or, select, sequence } from "../calculations"
+import {
+    createMapGrades,
+    mapCatA_Normal,
+    mapCatA_Scaled,
+    mapCatC_54321,
+    mapCatC_Scaled,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne } from "../requirements"
-import { categoryASubjects, categoryCSubjects, Subject } from "../subjects"
+import {
+    categoryASubjects,
+    categoryCSubjects,
+    passFailSubjects,
+    Subject,
+} from "../subjects"
 import { Programme } from "../types"
 import {
     choose,
@@ -12,25 +25,22 @@ import {
     discardCS,
     multiply,
     multiplySome,
-    scaleSubjects,
     w3C2X,
 } from "../weightings"
 
-const cuhkConfig = sequence(
-    discardCS,
-    discardCategoryB,
-    scaleSubjects(categoryASubjects, {
-        7: 8.5,
-        6: 7,
-        5: 5.5,
-    }),
-    scaleSubjects(categoryCSubjects, {
-        5: 7,
-        4: 5.5,
-        3: 4,
-        2: 2.5,
-    }),
-)
+const mapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Scaled],
+    [categoryCSubjects, mapCatC_Scaled],
+    [passFailSubjects, mapPassFail],
+])
+
+const mapGradesMedic = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryCSubjects, mapCatC_54321],
+    [passFailSubjects, mapPassFail],
+])
+
+const cuhkConfig = discardCS
 
 const catA3 = minimumOne(
     difference(categoryASubjects, [Subject.M1, Subject.M2]),
@@ -63,7 +73,7 @@ const r333_33 = select(
 const r453_33 = select(
     minimum({
         [Subject.Chi]: 4,
-        [Subject.Eng]: 5,
+        [Subject.Eng]: 5.5,
         [Subject.Maths]: 3,
         [Subject.CS]: 1,
     }),
@@ -119,7 +129,7 @@ const r345_33 = select(
     minimum({
         [Subject.Chi]: 3,
         [Subject.Eng]: 4,
-        [Subject.Maths]: 5,
+        [Subject.Maths]: 5.5,
         [Subject.CS]: 1,
     }),
     catA3,
@@ -157,11 +167,13 @@ const wMedic = sequence(
 export const cuhkProgrammes: Programme[] = [
     {
         id: "JS4006",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4018",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -171,16 +183,19 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4020",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4022",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4032",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -190,31 +205,37 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4044",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4056",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4068",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4070",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4082",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4094",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -223,21 +244,25 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4109",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4111",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4123",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4136",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -247,21 +272,25 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4202",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4214",
+        mapGrades,
         requirement: r453_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4226",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4238",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -271,7 +300,7 @@ export const cuhkProgrammes: Programme[] = [
             or(
                 select(
                     minimum({
-                        [Subject.Maths]: 5,
+                        [Subject.Maths]: 5.5,
                     }),
                     catA3,
                     catAorC3,
@@ -296,11 +325,13 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4240",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4252",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             cuhkConfig,
@@ -319,6 +350,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4254",
+        mapGrades,
         requirement: r453_33,
         weighting: sequence(
             cuhkConfig,
@@ -327,6 +359,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4264",
+        mapGrades,
         requirement: r453_33,
         weighting: sequence(
             cuhkConfig,
@@ -336,6 +369,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4276",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             cuhkConfig,
@@ -354,11 +388,13 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4329",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4331",
+        mapGrades,
         requirement: r432_33,
         weighting: sequence(
             cuhkConfig,
@@ -368,6 +404,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4343",
+        mapGrades,
         requirement: r342_33,
         weighting: sequence(
             cuhkConfig,
@@ -377,6 +414,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4361",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -408,11 +446,13 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4372",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4386",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             cuhkConfig,
@@ -437,6 +477,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4408",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -477,6 +518,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4412",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -516,6 +558,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4416",
+        mapGrades,
         requirement: r344_33,
         weighting: sequence(
             cuhkConfig,
@@ -536,6 +579,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4428",
+        mapGrades,
         requirement: r334_33,
         weighting: sequence(
             cuhkConfig,
@@ -559,6 +603,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4434",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -594,6 +639,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4446",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -632,6 +678,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4458",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             cuhkConfig,
@@ -653,6 +700,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4460",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -692,6 +740,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4462",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -734,6 +783,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4468",
+        mapGrades,
         requirement: r345_33,
         weighting: sequence(
             cuhkConfig,
@@ -755,16 +805,19 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4501",
+        mapGrades: mapGradesMedic,
         requirement: rMedic,
         weighting: wMedic,
     },
     {
         id: "JS4502",
+        mapGrades: mapGradesMedic,
         requirement: rMedic,
         weighting: wMedic,
     },
     {
         id: "JS4513",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -780,21 +833,25 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4525",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4537",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4542",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4550",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -823,6 +880,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4601",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -866,6 +924,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4648",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -905,6 +964,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4682",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -934,6 +994,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4690",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -971,6 +1032,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4719",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -995,6 +1057,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4725",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -1009,11 +1072,12 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4733",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
                 [Subject.Eng]: 4,
-                [Subject.Maths]: 5,
+                [Subject.Maths]: 5.5,
                 [Subject.CS]: 1,
             }),
             minimumOne([Subject.M1, Subject.M2], 5),
@@ -1037,6 +1101,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4750",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1054,6 +1119,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4760",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             cuhkConfig,
@@ -1075,6 +1141,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4801",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1084,6 +1151,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4812",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             cuhkConfig,
@@ -1093,6 +1161,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4824",
+        mapGrades,
         requirement: r333_33,
         weighting: sequence(
             cuhkConfig,
@@ -1111,6 +1180,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4836",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1120,11 +1190,13 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4838",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4848",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1134,6 +1206,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4850",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1143,6 +1216,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4858",
+        mapGrades,
         requirement: r342_33,
         weighting: sequence(
             cuhkConfig,
@@ -1152,6 +1226,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4862",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1161,11 +1236,13 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4874",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4886",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1175,6 +1252,7 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4892",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(
             cuhkConfig,
@@ -1184,11 +1262,13 @@ export const cuhkProgrammes: Programme[] = [
     },
     {
         id: "JS4893",
+        mapGrades,
         requirement: r332_33,
         weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4903",
+        mapGrades,
         requirement: r453_33,
         weighting: sequence(
             cuhkConfig,

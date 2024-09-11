@@ -1,6 +1,17 @@
 import { modify, select, sequence } from "../calculations"
+import {
+    createMapGrades,
+    mapCatA_Normal,
+    mapCatC_54321,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne } from "../requirements"
-import { categoryASubjects, categoryCSubjects, Subject } from "../subjects"
+import {
+    categoryASubjects,
+    categoryCSubjects,
+    passFailSubjects,
+    Subject,
+} from "../subjects"
 import { Calculation, Programme } from "../types"
 import {
     chooseBest,
@@ -9,6 +20,12 @@ import {
     multiply,
     multiplySome,
 } from "../weightings"
+
+const mapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryCSubjects, mapCatC_54321],
+    [passFailSubjects, mapPassFail],
+])
 
 const lingnanuConfig = (...calculations: Calculation[]) =>
     sequence(
@@ -19,7 +36,7 @@ const lingnanuConfig = (...calculations: Calculation[]) =>
     )
 
 const elec2 = minimumOne(
-    [...categoryASubjects, ...categoryCSubjects], // 4 or D
+    [...categoryASubjects, ...categoryCSubjects], // 2 or D
     2,
 )
 
@@ -48,6 +65,7 @@ const r333_22 = select(
 export const lingnanuProgrammes: Programme[] = [
     {
         id: "JS7101",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -62,6 +80,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7123",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -80,6 +99,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7133",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -92,6 +112,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7200",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -102,6 +123,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7204",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -114,6 +136,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7216",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -124,6 +147,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7225",
+        mapGrades,
         requirement: r333_22,
         weighting: lingnanuConfig(
             multiply({
@@ -139,6 +163,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7301",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -152,6 +177,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7302",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -167,6 +193,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7303",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -177,6 +204,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7304",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -187,6 +215,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7305",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -198,6 +227,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7306",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -210,6 +240,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7503",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -221,6 +252,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7606",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -231,6 +263,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7709",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -243,6 +276,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7802",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({
@@ -254,6 +288,7 @@ export const lingnanuProgrammes: Programme[] = [
     },
     {
         id: "JS7905",
+        mapGrades,
         requirement: r332_22,
         weighting: lingnanuConfig(
             multiply({

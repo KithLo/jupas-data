@@ -1,11 +1,19 @@
 import { isNotNil, sum, values } from "rambda"
 import { modify, optional, select, sequence } from "../calculations"
 import { maxGrade } from "../grades"
+import {
+    createMapGrades,
+    mapCatA_Scaled,
+    mapCatB_430,
+    mapCatC_Scaled,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
     categoryCSubjects,
+    passFailSubjects,
     Subject,
 } from "../subjects"
 import { Calculation, Programme, SubjectScores } from "../types"
@@ -22,48 +30,38 @@ import {
     scaleSubjects,
 } from "../weightings"
 
-const hkustConfig = sequence(
-    discardCS,
-    discardCategoryB,
-    scaleSubjects(categoryASubjects, {
-        7: 8.5,
-        6: 7,
-        5: 5.5,
-        1: 0,
-    }),
-    scaleSubjects(categoryCSubjects, {
-        5: 7,
-        4: 5.5,
-        3: 4,
-        2: 2.5,
-    }),
-)
+const mapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Scaled],
+    [categoryBSubjects, mapCatB_430],
+    [categoryCSubjects, mapCatC_Scaled],
+    [passFailSubjects, mapPassFail],
+])
+
+const hkustConfig = sequence(discardCS, discardCategoryB)
 
 const extraSubject = (maxScore: number): Calculation => {
     const percent = (percent: number) => (maxScore * percent) / 100
     return optional(
         sequence(
             discardCS,
-            discardCategoryB,
             scaleSubjects(categoryASubjects, {
-                7: percent(5),
-                6: percent(4.1),
-                5: percent(3.2),
+                8.5: percent(5),
+                7: percent(4.1),
+                5.5: percent(3.2),
                 4: percent(2.4),
                 3: percent(1.8),
                 2: 0,
                 1: 0,
             }),
             scaleSubjects(categoryBSubjects, {
-                3: percent(2.4),
-                2: percent(1.8),
-                1: 0,
+                4: percent(2.4),
+                3: percent(1.8),
             }),
             scaleSubjects(categoryCSubjects, {
-                5: percent(4.1),
-                4: percent(3.2),
-                3: percent(2.4),
-                2: 0,
+                7: percent(4.1),
+                5.5: percent(3.2),
+                4: percent(2.4),
+                2.5: 0,
                 1: 0,
             }),
             chooseBest(1),
@@ -76,7 +74,7 @@ const hkustSequence = (
     ...fns: Calculation[]
 ): Calculation => {
     const fn = sequence(hkustConfig, ...fns)
-    const maxScoreGrade = fn(maxGrade)
+    const maxScoreGrade = fn(mapGrades(maxGrade))
     if (!maxScoreGrade) return fn
     const maxScore = sum(values(maxScoreGrade).filter(isNotNil))
     if (!maxScore) return fn
@@ -229,6 +227,7 @@ const wFin = hkustSequence(
 export const hkustProgrammes: Programme[] = [
     {
         id: "JS5101",
+        mapGrades,
         requirement: r2Sci,
         weighting: hkustSequence(
             { allowCategoryB: true },
@@ -249,6 +248,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5102",
+        mapGrades,
         requirement: r2Sci,
         weighting: wSci({
             [Subject.Phys]: 2,
@@ -260,6 +260,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5103",
+        mapGrades,
         requirement: r2Sci,
         weighting: wSci({
             [Subject.Bio]: 2,
@@ -271,6 +272,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5181",
+        mapGrades,
         requirement: r3Sci,
         weighting: wSci({
             [Subject.Phys]: 2,
@@ -282,71 +284,85 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5200",
+        mapGrades,
         requirement: rEngg,
         weighting: wEngg,
     },
     {
         id: "JS5282",
+        mapGrades,
         requirement: rEngg,
         weighting: wEngg,
     },
     {
         id: "JS5300",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5311",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5312",
+        mapGrades,
         requirement: rBba,
         weighting: wFin,
     },
     {
         id: "JS5313",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5314",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5315",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5316",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5317",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5318",
+        mapGrades,
         requirement: rBba,
         weighting: wBuisAndMgmt,
     },
     {
         id: "JS5331",
+        mapGrades,
         requirement: rBba,
         weighting: wFin,
     },
     {
         id: "JS5332",
+        mapGrades,
         requirement: rBba,
         weighting: wFin,
     },
     {
         id: "JS5411",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -370,6 +386,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5412",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -396,6 +413,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5711",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -458,6 +476,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5811",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -494,6 +513,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5812",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -517,6 +537,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5813",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -575,6 +596,7 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5814",
+        mapGrades,
         requirement: rBba,
         weighting: hkustSequence(
             { allowCategoryB: false },
@@ -592,11 +614,13 @@ export const hkustProgrammes: Programme[] = [
     },
     {
         id: "JS5822",
+        mapGrades,
         requirement: rBba,
         weighting: wFin,
     },
     {
         id: "JS5901",
+        mapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,

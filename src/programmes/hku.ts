@@ -1,6 +1,17 @@
 import { modify, optional, select, sequence } from "../calculations"
+import {
+    createMapGrades,
+    mapCatA_Scaled,
+    mapCatC_Scaled,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
-import { categoryASubjects, categoryCSubjects, Subject } from "../subjects"
+import {
+    categoryASubjects,
+    categoryCSubjects,
+    passFailSubjects,
+    Subject,
+} from "../subjects"
 import { Programme } from "../types"
 import {
     choose,
@@ -13,25 +24,15 @@ import {
     multiply,
     multiplyAll,
     multiplySome,
-    scaleSubjects,
 } from "../weightings"
 
-const hkuConfig = sequence(
-    discardCS,
-    discardCategoryB,
-    scaleSubjects(categoryASubjects, {
-        7: 8.5,
-        6: 7,
-        5: 5.5,
-        1: 0,
-    }),
-    scaleSubjects(categoryCSubjects, {
-        5: 7,
-        4: 5.5,
-        3: 4,
-        2: 2.5,
-    }),
-)
+const mapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Scaled],
+    [categoryCSubjects, mapCatC_Scaled],
+    [passFailSubjects, mapPassFail],
+])
+
+const hkuConfig = sequence(discardCS, discardCategoryB)
 
 const hkuElectiveReq = minimumOne(
     [...categoryASubjects, ...categoryCSubjects], // 3 or C
@@ -164,31 +165,37 @@ const engg = sequence(
 export const hkuProgrammes: Programme[] = [
     {
         id: "JS6004",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6016",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6028",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6042",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6054",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: artWeighting,
     },
     {
         id: "JS6066",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(
             hkuConfig,
@@ -203,6 +210,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6078",
+        mapGrades,
         requirement: select(
             hku453,
             hkuElectiveReq,
@@ -217,6 +225,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6080",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(
             hkuConfig,
@@ -231,6 +240,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6092",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(
             hkuConfig,
@@ -246,6 +256,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6107",
+        mapGrades,
         requirement: select(
             hku343,
             minimumOne([Subject.Bio, Subject.Chem], 3),
@@ -265,6 +276,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6119",
+        mapGrades,
         requirement: select(
             hku332,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
@@ -292,11 +304,13 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6157",
+        mapGrades,
         requirement: select(hku342, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(discardCategoryC, hkuConfig, chooseBest(5)),
     },
     {
         id: "JS6212",
+        mapGrades,
         requirement: select(hku352, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(
             hkuConfig,
@@ -307,6 +321,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6224",
+        mapGrades,
         requirement: select(
             hku344,
             minimumOne([Subject.M1, Subject.M2], 4),
@@ -336,21 +351,25 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6236",
+        mapGrades,
         requirement: select(hku342, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6248",
+        mapGrades,
         requirement: select(hku343, hkuElectiveReq, hkuElectiveReq),
         weighting: engg,
     },
     {
         id: "JS6250",
+        mapGrades,
         requirement: select(hku342, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6262",
+        mapGrades,
         requirement: select(
             hku333,
             minimumOne([Subject.M1, Subject.M2], 3),
@@ -360,11 +379,13 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6286",
+        mapGrades,
         requirement: select(hku333, hkuElectiveReq, hkuElectiveReq),
         weighting: artWeighting,
     },
     {
         id: "JS6406",
+        mapGrades,
         requirement: select(
             hku453,
             hkuElectiveReq,
@@ -379,6 +400,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6418",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(
             hkuConfig,
@@ -388,6 +410,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6456",
+        mapGrades,
         requirement: select(
             hku342,
             minimumOne([Subject.Chem], 3),
@@ -398,6 +421,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6468",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(
             hkuConfig,
@@ -407,6 +431,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6470",
+        mapGrades,
         requirement: select(
             hku344,
             minimumOne([Subject.Bio, Subject.Chem], 3),
@@ -417,6 +442,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6482",
+        mapGrades,
         requirement: select(
             hku332,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
@@ -430,6 +456,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6494",
+        mapGrades,
         requirement: select(
             hku342,
             minimumOne([Subject.Chem], 3),
@@ -440,6 +467,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6688",
+        mapGrades,
         requirement: select(
             hku334,
             requireMultiple(
@@ -484,16 +512,19 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6705",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6717",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6729",
+        mapGrades,
         requirement: select(
             hku334,
             minimumOne([Subject.M1, Subject.M2], 4),
@@ -519,26 +550,31 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6731",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6755",
+        mapGrades,
         requirement: select(hku343, hkuElectiveReq, hkuElectiveReq),
         weighting: bba5,
     },
     {
         id: "JS6767",
+        mapGrades,
         requirement: select(hku343, hkuElectiveReq, hkuElectiveReq),
         weighting: bba5,
     },
     {
         id: "JS6781",
+        mapGrades,
         requirement: select(hku343, hkuElectiveReq, hkuElectiveReq),
         weighting: bba5,
     },
     {
         id: "JS6793",
+        mapGrades,
         requirement: select(
             hku343,
             minimumOne(
@@ -551,6 +587,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6808",
+        mapGrades,
         requirement: select(
             hku454,
             hkuElectiveReq,
@@ -561,6 +598,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6810",
+        mapGrades,
         requirement: select(
             hku453,
             hkuElectiveReq,
@@ -571,11 +609,13 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6822",
+        mapGrades,
         requirement: select(hku332, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
         id: "JS6846",
+        mapGrades,
         requirement: select(
             hku343,
             minimumOne(
@@ -595,6 +635,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6858",
+        mapGrades,
         requirement: select(
             hku452,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
@@ -619,6 +660,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6860",
+        mapGrades,
         requirement: select(
             hku343,
             hkuElectiveReq,
@@ -629,6 +671,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6884",
+        mapGrades,
         requirement: select(
             hku343,
             minimumOne([Subject.M1, Subject.M2], 3),
@@ -655,6 +698,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6896",
+        mapGrades,
         requirement: select(
             hku354,
             hkuElectiveReq,
@@ -665,6 +709,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6901",
+        mapGrades,
         requirement: select(
             hku332,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
@@ -692,6 +737,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6925",
+        mapGrades,
         requirement: select(
             hku333,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
@@ -701,6 +747,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6937",
+        mapGrades,
         requirement: select(
             hku344,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
@@ -710,6 +757,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6949",
+        mapGrades,
         requirement: select(
             hku342,
             minimumOne([Subject.Bio, Subject.Chem], 3),
@@ -720,6 +768,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6951",
+        mapGrades,
         requirement: select(
             hku333,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
@@ -729,6 +778,7 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6963",
+        mapGrades,
         requirement: select(
             hku333,
             minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),

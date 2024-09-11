@@ -1,4 +1,4 @@
-import { difference, max, values } from "rambda"
+import { difference } from "rambda"
 import {
     aplChinese,
     categoryASubjects,
@@ -7,74 +7,37 @@ import {
     conflictingSubjects,
     passFailSubjects,
 } from "./subjects"
-import { Grade, SubjectScores } from "./types"
+import { Grade, SubjectGrades } from "./types"
 
 export const grades: Grade[] = [
     {
         subjects: categoryASubjects,
-        grades: {
-            "5**": 7,
-            "5*": 6,
-            "5": 5,
-            "4": 4,
-            "3": 3,
-            "2": 2,
-            "1": 1,
-            U: 0,
-        },
-    },
-    {
-        subjects: categoryBSubjects,
-        grades: {
-            D2: 3,
-            D1: 2,
-            A: 1,
-            U: 0,
-        },
+        grades: ["5**", "5*", "5", "4", "3", "2", "1", "U"],
     },
     {
         subjects: difference(categoryBSubjects, aplChinese),
-        grades: {
-            D2: 3,
-            D1: 2,
-            A: 1,
-            U: 0,
-        },
+        grades: ["D2", "D1", "A", "U"],
     },
     {
         subjects: aplChinese,
-        grades: {
-            D: 2,
-            A: 1,
-            U: 0,
-        },
+        grades: ["D", "A", "U"],
     },
     {
         subjects: categoryCSubjects,
-        grades: {
-            A: 5,
-            B: 4,
-            C: 3,
-            D: 2,
-            E: 1,
-            U: 0,
-        },
+        grades: ["A", "B", "C", "D", "E", "U"],
     },
     {
         subjects: passFailSubjects,
-        grades: {
-            A: 1,
-            U: 0,
-        },
+        grades: ["A", "U"],
     },
 ]
 
-export const maxGrade: SubjectScores = {}
+export const maxGrade: SubjectGrades = {}
 
 for (const item of grades) {
-    const maxScore = values(item.grades).reduce(max)
+    const first = item.grades[0]!
     for (const subject of item.subjects) {
-        maxGrade[subject] = maxScore
+        maxGrade[subject] = first
     }
 }
 

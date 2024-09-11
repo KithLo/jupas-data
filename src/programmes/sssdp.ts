@@ -1,9 +1,21 @@
-import { modify, or, select, sequence } from "../calculations"
+import { modify, select, sequence } from "../calculations"
+import {
+    createMapGrades,
+    mapCatA_Normal,
+    mapCatA_Normal_X1,
+    mapCatB_430,
+    mapCatB_432,
+    mapCatC_33322,
+    mapCatC_54321,
+    mapCatC_65432,
+    mapPassFail,
+} from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
     categoryCSubjects,
+    passFailSubjects,
     Subject,
 } from "../subjects"
 import { Programme } from "../types"
@@ -15,52 +27,37 @@ import {
     discardCS,
     multiply,
     multiplyAll,
-    scaleSubjects,
     w3C2X,
 } from "../weightings"
 
-const basicWeighting = sequence(
-    discardCS,
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-)
+const basicWeighting = discardCS
 
-const sfuWeighting = sequence(
-    discardCS,
-    discardCategoryC,
-    scaleSubjects(categoryASubjects, {
-        1: 0,
-    }),
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-    chooseBest(5),
-)
+const basicMapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryBSubjects, mapCatB_432],
+    [categoryCSubjects, mapCatC_54321],
+    [passFailSubjects, mapPassFail],
+])
 
-const hsuhkWeighting = sequence(
-    discardCS,
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-)
+const sfuWeighting = sequence(discardCS, discardCategoryC, chooseBest(5))
 
-const twcWeighting = sequence(
-    discardCS,
-    discardCategoryC,
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-    chooseBest(5),
-)
+const sfuMapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal_X1],
+    [categoryBSubjects, mapCatB_432],
+    [passFailSubjects, mapPassFail],
+])
+
+const hsuhkWeighting = discardCS
+
+const hsuhkMapGrades = basicMapGrades
+
+const twcWeighting = sequence(discardCS, discardCategoryC, chooseBest(5))
+
+const twcMapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryBSubjects, mapCatB_432],
+    [passFailSubjects, mapPassFail],
+])
 
 const muRequirement = select(
     minimum({
@@ -71,67 +68,43 @@ const muRequirement = select(
     }),
     requireMultiple(
         2,
-        or(
-            minimumOne(categoryASubjects, 2),
-            minimumOne(categoryBSubjects, 1),
-            minimumOne(categoryCSubjects, 1),
+        minimumOne(
+            [...categoryASubjects, ...categoryBSubjects, ...categoryCSubjects],
+            2,
         ),
     ),
 )
 
-const muConfig = sequence(
-    scaleSubjects(categoryASubjects, { 1: 0 }),
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-    scaleSubjects(categoryCSubjects, {
-        5: 6,
-        4: 5,
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-    scaleSubjects([Subject.CS], { 1: 2 }),
-)
+const muConfig = sequence()
 
-const theiConfig = sequence(
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-    scaleSubjects(categoryCSubjects, {
-        5: 3,
-        4: 3,
-        3: 3,
-        2: 2,
-        1: 2,
-    }),
-    scaleSubjects([Subject.CS], { 1: 2 }),
-    w3C2X,
-)
+const muMapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal_X1],
+    [categoryBSubjects, mapCatB_432],
+    [categoryCSubjects, mapCatC_65432],
+    [passFailSubjects, mapPassFail],
+])
 
-const uowchkConfig = sequence(
-    discardCS,
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 2,
-    }),
-    chooseBest(5),
-)
+const theiConfig = w3C2X
 
-const hksyuConfig = sequence(
-    discardCS,
-    scaleSubjects(categoryBSubjects, {
-        3: 4,
-        2: 3,
-        1: 0,
-    }),
-    chooseBest(5),
-)
+const theiMapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryBSubjects, mapCatB_432],
+    [categoryCSubjects, mapCatC_33322],
+    [passFailSubjects, mapPassFail],
+])
+
+const uowchkConfig = sequence(discardCS, chooseBest(5))
+
+const uowchkMapGrades = basicMapGrades
+
+const hksyuConfig = sequence(discardCS, chooseBest(5))
+
+const hksyuMapGrades = createMapGrades([
+    [categoryASubjects, mapCatA_Normal],
+    [categoryBSubjects, mapCatB_430],
+    [categoryCSubjects, mapCatC_54321],
+    [passFailSubjects, mapPassFail],
+])
 
 const basicRequirement = select(
     minimum({
@@ -146,41 +119,49 @@ const basicRequirement = select(
 export const sssdpProgrammes: Programme[] = [
     {
         id: "JSSA01",
+        mapGrades: sfuMapGrades,
         requirement: basicRequirement,
         weighting: sequence(discardCategoryB, sfuWeighting),
     },
     {
         id: "JSSA02",
+        mapGrades: sfuMapGrades,
         requirement: basicRequirement,
         weighting: sfuWeighting,
     },
     {
         id: "JSSA03",
+        mapGrades: sfuMapGrades,
         requirement: basicRequirement,
         weighting: sequence(discardCategoryB, sfuWeighting),
     },
     {
         id: "JSSA04",
+        mapGrades: sfuMapGrades,
         requirement: basicRequirement,
         weighting: sfuWeighting,
     },
     {
         id: "JSSA05",
+        mapGrades: sfuMapGrades,
         requirement: basicRequirement,
         weighting: sfuWeighting,
     },
     {
         id: "JSSA06",
+        mapGrades: sfuMapGrades,
         requirement: basicRequirement,
         weighting: sfuWeighting,
     },
     {
         id: "JSSC02",
+        mapGrades: basicMapGrades,
         requirement: basicRequirement,
         weighting: basicWeighting,
     },
     {
         id: "JSSH01",
+        mapGrades: hsuhkMapGrades,
         requirement: basicRequirement,
         weighting: sequence(
             hsuhkWeighting,
@@ -208,6 +189,7 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSH02",
+        mapGrades: hsuhkMapGrades,
         requirement: select(
             minimum({
                 [Subject.Chi]: 3,
@@ -242,6 +224,7 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSH03",
+        mapGrades: hsuhkMapGrades,
         requirement: basicRequirement,
         weighting: sequence(
             hsuhkWeighting,
@@ -266,6 +249,7 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSH04",
+        mapGrades: hsuhkMapGrades,
         requirement: basicRequirement,
         weighting: sequence(
             hsuhkWeighting,
@@ -276,6 +260,7 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSH05",
+        mapGrades: hsuhkMapGrades,
         requirement: basicRequirement,
         weighting: sequence(
             hsuhkWeighting,
@@ -302,46 +287,55 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSH06",
+        mapGrades: hsuhkMapGrades,
         requirement: basicRequirement,
         weighting: sequence(hsuhkWeighting, chooseBest(5)),
     },
     {
         id: "JSST01",
+        mapGrades: twcMapGrades,
         requirement: basicRequirement,
         weighting: twcWeighting,
     },
     {
         id: "JSST02",
+        mapGrades: twcMapGrades,
         requirement: basicRequirement,
         weighting: twcWeighting,
     },
     {
         id: "JSST03",
+        mapGrades: twcMapGrades,
         requirement: basicRequirement,
         weighting: twcWeighting,
     },
     {
         id: "JSST04",
+        mapGrades: twcMapGrades,
         requirement: basicRequirement,
         weighting: twcWeighting,
     },
     {
         id: "JSST05",
+        mapGrades: twcMapGrades,
         requirement: basicRequirement,
         weighting: twcWeighting,
     },
     {
         id: "JSST06",
+        mapGrades: twcMapGrades,
         requirement: basicRequirement,
         weighting: twcWeighting,
     },
     {
         id: "JSST07",
+        mapGrades: twcMapGrades,
         requirement: basicRequirement,
         weighting: twcWeighting,
     },
     {
         id: "JSSU12",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(
             muConfig,
@@ -351,21 +345,25 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSU14",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU15",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU18",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU40",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(
             muConfig,
@@ -382,6 +380,7 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSU50",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(
             muConfig,
@@ -398,131 +397,157 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSU55",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU61",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU67",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU68",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU69",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU70",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU72",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU77",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU78",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU79",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU90",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU95",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU96",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU97",
+        mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSV01",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV02",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV03",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV04",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV05",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV07",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV08",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV09",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSV10",
+        mapGrades: theiMapGrades,
         requirement: basicRequirement,
         weighting: theiConfig,
     },
     {
         id: "JSSW01",
+        mapGrades: uowchkMapGrades,
         requirement: basicRequirement,
         weighting: uowchkConfig,
     },
     {
         id: "JSSW02",
+        mapGrades: uowchkMapGrades,
         requirement: basicRequirement,
         weighting: uowchkConfig,
     },
     {
         id: "JSSY01",
+        mapGrades: hksyuMapGrades,
         requirement: basicRequirement,
         weighting: hksyuConfig,
     },
