@@ -4,9 +4,8 @@ import { build, context } from "esbuild"
 import jsYaml from "js-yaml"
 import { mergeDeepLeft } from "rambda"
 
-const DATA_PROXY_PORT = 55555
-
 const serve = process.argv[2] === "--serve"
+const port = serve ? Number(process.argv[3]) : null
 const dev = serve || process.argv[2] === "--dev"
 
 const localeDir = path.resolve("locales")
@@ -125,7 +124,7 @@ if (serve) {
     const ctx = await context(buildOptions)
     ctx.serve({
         servedir: "dist",
-        port: DATA_PROXY_PORT,
+        port: port,
     })
     await buildLocale()
 } else {

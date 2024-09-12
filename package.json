@@ -6,7 +6,8 @@
     "scripts": {
         "build": "node build.mjs",
         "build:dev": "node build.mjs --dev",
-        "dev": "node build.mjs --serve",
+        "dev": "node build.mjs --serve 55555",
+        "dev:last": "node build.mjs --serve 55554",
         "lint": "eslint . --fix",
         "test": "jest"
     },

@@ -13,7 +13,8 @@ export { grades, maxGrade } from "./grades"
 export { programmes } from "./programmes"
 
 export const year: string = "2024"
-export const pastYears: string[] = []
+export const lastYear: string | null = null
+export const hasStats: boolean = true
 
 export const studyAreas = Object.values(StudyArea)
 export const institutions = Object.values(Institution)
