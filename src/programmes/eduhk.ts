@@ -3,7 +3,7 @@ import {
     createMapGrades,
     mapCatA_Normal,
     mapCatB_430,
-    mapCatC_76543,
+    mapCatC_eduhk,
     mapPassFail,
 } from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
@@ -20,7 +20,7 @@ import { chooseBest, discardCS, multiply } from "../weightings"
 const mapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal],
     [categoryBSubjects, mapCatB_430],
-    [categoryCSubjects, mapCatC_76543],
+    [categoryCSubjects, mapCatC_eduhk],
     [passFailSubjects, mapPassFail],
 ])
 

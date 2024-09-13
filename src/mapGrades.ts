@@ -112,87 +112,158 @@ export const mapCatB_432 = (grade: string): number => {
     }
 }
 
-export const mapCatC_Scaled = (grade: string): number => {
+export const mapCatC_hku = (grade: string): number => {
     switch (grade) {
-        case "A":
+        case "C2":
+        case "C1":
+        case "N1":
+        case "G6":
+            return 8.5
+        case "N2":
+        case "B2":
+        case "G5":
             return 7
-        case "B":
+        case "B1":
+        case "G4":
+            return 6
+        case "A2":
+        case "N3":
+        case "G3":
+            return 4
+        default:
+            return 0
+    }
+}
+
+export const mapCatC_cuhk = (grade: string): number => {
+    switch (grade) {
+        case "C2":
+        case "N1":
+        case "G6":
+            return 7
+        case "C1":
+        case "N2":
+        case "G5":
             return 5.5
-        case "C":
+        case "B2":
+        case "N3":
+        case "G4":
             return 4
-        case "D":
-            return 2.5
-        case "E":
-            return 1
+        case "B1":
+        case "A2":
+        case "G3":
+            return 3
         default:
             return 0
     }
 }
 
-export const mapCatC_76543 = (grade: string): number => {
+export const mapCatC_cuhk_medic = (grade: string): number => {
     switch (grade) {
-        case "A":
+        case "C2":
+        case "N1":
+        case "G6":
+            return 6
+        case "C1":
+        case "N2":
+        case "G5":
+            return 5
+        case "B2":
+        case "N3":
+        case "G4":
+            return 4
+        case "B1":
+        case "A2":
+        case "G3":
+            return 3
+        default:
+            return 0
+    }
+}
+
+export const mapCatC_eduhk = (grade: string): number => {
+    switch (grade) {
+        case "C2":
+        case "N1":
+        case "G6":
             return 7
-        case "B":
+        case "C1":
+        case "G5":
             return 6
-        case "C":
+        case "B2":
+        case "N2":
+        case "G4":
             return 5
-        case "D":
+        case "B1":
+        case "N3":
+        case "G3":
             return 4
-        case "E":
+        case "A2":
             return 3
         default:
             return 0
     }
 }
 
-export const mapCatC_65432 = (grade: string): number => {
+export const mapCatC_hkbu = (grade: string): number => {
     switch (grade) {
-        case "A":
+        case "C2":
+        case "C1":
+        case "N1":
+        case "G6":
+            return 7
+        case "B2":
+        case "B1":
+        case "N2":
+        case "G5":
+        case "G4":
+            return 5.5
+        case "A2":
+        case "N3":
+        case "G3":
+            return 4
+        default:
+            return 0
+    }
+}
+
+export const mapCatC_hkmu = (grade: string): number => {
+    switch (grade) {
+        case "C2":
+        case "N1":
+        case "G6":
+            return 7
+        case "C1":
+        case "G5":
             return 6
-        case "B":
+        case "B2":
+        case "N2":
+        case "G4":
             return 5
-        case "C":
+        case "B1":
+        case "N3":
+        case "G3":
             return 4
-        case "D":
+        case "A2":
             return 3
-        case "E":
-            return 2
         default:
             return 0
     }
 }
 
-export const mapCatC_54321 = (grade: string): number => {
+const mapCatC_unknown = (grade: string): number => {
     switch (grade) {
-        case "A":
-            return 5
-        case "B":
-            return 4
-        case "C":
-            return 3
-        case "D":
-            return 2
-        case "E":
-            return 1
         default:
             return 0
     }
 }
 
-export const mapCatC_33322 = (grade: string): number => {
-    switch (grade) {
-        case "A":
-        case "B":
-        case "C":
-            return 3
-        case "D":
-        case "E":
-            return 2
-        default:
-            return 0
-    }
-}
+export const mapCatC_cityu = mapCatC_unknown
+export const mapCatC_hkust = mapCatC_unknown
+export const mapCatC_lingnanu = mapCatC_unknown
+export const mapCatC_polyu = mapCatC_unknown
+export const mapCatC_sssdp = mapCatC_unknown
+export const mapCatC_thei = mapCatC_unknown
 
 export const mapPassFail = (grade: string): number => {
     switch (grade) {

@@ -2,7 +2,7 @@ import { modify, select, sequence } from "../calculations"
 import {
     createMapGrades,
     mapCatA_Normal,
-    mapCatC_54321,
+    mapCatC_lingnanu,
     mapPassFail,
 } from "../mapGrades"
 import { minimum, minimumOne } from "../requirements"
@@ -23,7 +23,7 @@ import {
 
 const mapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal],
-    [categoryCSubjects, mapCatC_54321],
+    [categoryCSubjects, mapCatC_lingnanu],
     [passFailSubjects, mapPassFail],
 ])
 

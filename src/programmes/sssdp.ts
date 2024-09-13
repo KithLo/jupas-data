@@ -5,9 +5,9 @@ import {
     mapCatA_Normal_X1,
     mapCatB_430,
     mapCatB_432,
-    mapCatC_33322,
-    mapCatC_54321,
-    mapCatC_65432,
+    mapCatC_sssdp,
+    mapCatC_thei,
+    mapCatC_hkmu,
     mapPassFail,
 } from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
@@ -35,7 +35,7 @@ const basicWeighting = discardCS
 const basicMapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal],
     [categoryBSubjects, mapCatB_432],
-    [categoryCSubjects, mapCatC_54321],
+    [categoryCSubjects, mapCatC_sssdp],
     [passFailSubjects, mapPassFail],
 ])
 
@@ -46,6 +46,8 @@ const sfuMapGrades = createMapGrades([
     [categoryBSubjects, mapCatB_432],
     [passFailSubjects, mapPassFail],
 ])
+
+const hkchcMapGrades = basicMapGrades
 
 const hsuhkWeighting = discardCS
 
@@ -80,7 +82,7 @@ const muConfig = sequence()
 const muMapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal_X1],
     [categoryBSubjects, mapCatB_432],
-    [categoryCSubjects, mapCatC_65432],
+    [categoryCSubjects, mapCatC_hkmu],
     [passFailSubjects, mapPassFail],
 ])
 
@@ -89,7 +91,7 @@ const theiConfig = w3C2X
 const theiMapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal],
     [categoryBSubjects, mapCatB_432],
-    [categoryCSubjects, mapCatC_33322],
+    [categoryCSubjects, mapCatC_thei],
     [passFailSubjects, mapPassFail],
 ])
 
@@ -102,7 +104,7 @@ const hksyuConfig = sequence(discardCS, chooseBest(5))
 const hksyuMapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal],
     [categoryBSubjects, mapCatB_430],
-    [categoryCSubjects, mapCatC_54321],
+    [categoryCSubjects, mapCatC_sssdp],
     [passFailSubjects, mapPassFail],
 ])
 
@@ -155,7 +157,7 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSC02",
-        mapGrades: basicMapGrades,
+        mapGrades: hkchcMapGrades,
         requirement: basicRequirement,
         weighting: basicWeighting,
     },

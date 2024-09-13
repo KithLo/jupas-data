@@ -3,7 +3,7 @@ import {
     createMapGrades,
     mapCatA_Normal_X1,
     mapCatB_432,
-    mapCatC_65432,
+    mapCatC_hkmu,
     mapPassFail,
 } from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
@@ -36,7 +36,7 @@ const muRequirement = select(
 const mapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal_X1],
     [categoryBSubjects, mapCatB_432],
-    [categoryCSubjects, mapCatC_65432],
+    [categoryCSubjects, mapCatC_hkmu],
     [passFailSubjects, mapPassFail],
 ])
 

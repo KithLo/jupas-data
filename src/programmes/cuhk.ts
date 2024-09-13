@@ -4,8 +4,8 @@ import {
     createMapGrades,
     mapCatA_Normal,
     mapCatA_Scaled,
-    mapCatC_54321,
-    mapCatC_Scaled,
+    mapCatC_cuhk,
+    mapCatC_cuhk_medic,
     mapPassFail,
 } from "../mapGrades"
 import { minimum, minimumOne } from "../requirements"
@@ -30,13 +30,13 @@ import {
 
 const mapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Scaled],
-    [categoryCSubjects, mapCatC_Scaled],
+    [categoryCSubjects, mapCatC_cuhk],
     [passFailSubjects, mapPassFail],
 ])
 
 const mapGradesMedic = createMapGrades([
     [categoryASubjects, mapCatA_Normal],
-    [categoryCSubjects, mapCatC_54321],
+    [categoryCSubjects, mapCatC_cuhk_medic],
     [passFailSubjects, mapPassFail],
 ])
 
