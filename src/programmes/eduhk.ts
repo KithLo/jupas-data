@@ -79,7 +79,7 @@ export const eduhkProgrammes: Programme[] = [
         id: "JS8234",
         mapGrades,
         requirement: eduhkCommonReq,
-        weighting: chooseBest(5),
+        weighting: sequence(discardCS, chooseBest(5)),
     },
     {
         id: "JS8246",
