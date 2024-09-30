@@ -9,3 +9,8 @@
 此計算器中的資料並不保證百分之百正確。如果您發現任何錯誤，請[在此](https://github.com/KithLo/jupas-data/issues)報告。
 
 暫不支援 重讀生 及 非華語考生 的分數計算
+
+## 往年存檔
+
+[2025](https://kithlo.github.io/jupas-calculator/en/2025)
+[2024](https://kithlo.github.io/jupas-calculator/en/2024)
