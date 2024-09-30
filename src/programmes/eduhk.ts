@@ -6,12 +6,7 @@ import {
     mapCatC_eduhk,
     mapPassFail,
 } from "../mapGrades"
-import {
-    minimum,
-    minimumOne,
-    requireMultiple,
-    unknownRequirement,
-} from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
@@ -20,12 +15,7 @@ import {
     Subject,
 } from "../subjects"
 import { Programme } from "../types"
-import {
-    chooseBest,
-    discardCS,
-    multiply,
-    unknownWeighting,
-} from "../weightings"
+import { chooseBest, discardCS, multiply } from "../weightings"
 
 const mapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal],
@@ -57,80 +47,257 @@ export const eduhkProgrammes: Programme[] = [
     {
         id: "JS8001",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Music]: 1.5,
+                    [Subject.Apl710]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8002",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.VA]: 1.5,
+                    [Subject.Apl668]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8003",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Chi]: 1.5,
+                    [Subject.Eng]: 1.5,
+                    [Subject.ChiLit]: 1.5,
+                    [Subject.ICT]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8004",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Eng]: 1.5,
+                    [Subject.ICT]: 1.5,
+                    [Subject.EngLit]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8005",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.ChiHist]: 1.5,
+                    [Subject.Hist]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8006",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Chi]: 1.5,
+                    [Subject.Eng]: 1.5,
+                    [Subject.Apl704]: 1.5,
+                    [Subject.Apl665]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8007",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            eduhkCoreReq,
+            minimumOne([Subject.Econ, Subject.BAFS], 3),
+            eduhkElectiveReq,
+        ),
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.BAFS]: 1.5,
+                    [Subject.Econ]: 1.5,
+                    [Subject.Apl703]: 1.5,
+                    [Subject.Apl720]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8008",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            eduhkCoreReq,
+            minimumOne(
+                [Subject.ICT, Subject.Bio, Subject.Chem, Subject.Phys],
+                3,
+            ),
+            eduhkElectiveReq,
+        ),
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Maths]: 1.5,
+                    [Subject.M1]: 1.5,
+                    [Subject.M2]: 1.5,
+                    [Subject.ICT]: 1.5,
+                    [Subject.Bio]: 1.5,
+                    [Subject.Chem]: 1.5,
+                    [Subject.Phys]: 1.5,
+                    [Subject.Apl669]: 1.5,
+                    [Subject.Apl722]: 1.5,
+                    [Subject.Apl684]: 1.5,
+                    [Subject.Apl706]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8009",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            eduhkCoreReq,
+            minimumOne(
+                [
+                    Subject.ICT,
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Phys,
+                    Subject.M1,
+                    Subject.M2,
+                ],
+                2,
+            ),
+            eduhkElectiveReq,
+        ),
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Maths]: 1.5,
+                    [Subject.M1]: 1.5,
+                    [Subject.M2]: 1.5,
+                    [Subject.Phys]: 1.5,
+                    [Subject.Apl722]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8010",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.PE]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8011",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            eduhkCoreReq,
+            minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 4),
+            eduhkElectiveReq,
+        ),
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Chem]: 1.5,
+                    [Subject.Bio]: 1.3,
+                    [Subject.Phys]: 1.2,
+                    [Subject.Maths]: 1.1,
+                    [Subject.M1]: 1.1,
+                    [Subject.M2]: 1.1,
+                    [Subject.Geog]: 1.1,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8012",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            eduhkCoreReq,
+            minimumOne([Subject.Geog, Subject.THS], 3),
+            eduhkElectiveReq,
+        ),
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Eng]: 1.5,
+                    [Subject.Geog]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8013",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.ChiHist]: 1.5,
+                    [Subject.Econ]: 1.5,
+                    [Subject.Geog]: 1.5,
+                    [Subject.Hist]: 1.5,
+                    [Subject.Apl704]: 1.5,
+                    [Subject.Apl665]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8507",
@@ -178,8 +345,18 @@ export const eduhkProgrammes: Programme[] = [
     {
         id: "JS8674",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Chi]: 1.5,
+                    [Subject.Eng]: 1.5,
+                    [Subject.ICT]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8675",
@@ -200,14 +377,32 @@ export const eduhkProgrammes: Programme[] = [
     {
         id: "JS8685",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Music]: 1.5,
+                    [Subject.Apl710]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8686",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.VA]: 1.5,
+                    [Subject.Apl668]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS8687",
@@ -228,6 +423,7 @@ export const eduhkProgrammes: Programme[] = [
                     [Subject.Apl677]: 1.5,
                     [Subject.Apl718]: 1.5,
                     [Subject.Apl711]: 1.5,
+                    [Subject.Apl702]: 1.5,
                 }),
             ),
             chooseBest(5),
@@ -236,8 +432,8 @@ export const eduhkProgrammes: Programme[] = [
     {
         id: "JS8688",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(discardCS, chooseBest(5)),
     },
     {
         id: "JS8702",
@@ -254,11 +450,13 @@ export const eduhkProgrammes: Programme[] = [
             discardCS,
             modify(
                 multiply({
-                    [Subject.Maths]: 1.5,
-                    [Subject.Bio]: 1.5,
-                    [Subject.Chem]: 1.5,
-                    [Subject.Geog]: 1.5,
-                    [Subject.Phys]: 1.5,
+                    [Subject.Bio]: 1.6,
+                    [Subject.Chem]: 1.6,
+                    [Subject.Geog]: 1.2,
+                    [Subject.Maths]: 1.2,
+                    [Subject.M1]: 1.2,
+                    [Subject.M2]: 1.2,
+                    [Subject.Phys]: 1.1,
                 }),
             ),
             chooseBest(5),
@@ -299,7 +497,15 @@ export const eduhkProgrammes: Programme[] = [
                     [Subject.Phys]: 1.5,
                     [Subject.DAT]: 1.5,
                     [Subject.ICT]: 1.5,
+                    [Subject.Apl669]: 1.5,
+                    [Subject.Apl707]: 1.5,
+                    [Subject.Apl720]: 1.5,
+                    [Subject.Apl693]: 1.5,
+                    [Subject.Apl730]: 1.5,
                     [Subject.Apl722]: 1.5,
+                    [Subject.Apl684]: 1.5,
+                    [Subject.Apl727]: 1.5,
+                    [Subject.Apl714]: 1.5,
                     [Subject.Apl706]: 1.5,
                 }),
             ),
@@ -323,15 +529,12 @@ export const eduhkProgrammes: Programme[] = [
                     [Subject.M2]: 1.5,
                     [Subject.DAT]: 1.5,
                     [Subject.ICT]: 1.5,
-                    [Subject.Apl669]: 1.5,
-                    [Subject.Apl707]: 1.5,
-                    [Subject.Apl708]: 1.5,
-                    [Subject.Apl681]: 1.5,
                     [Subject.Apl662]: 1.5,
                     [Subject.Apl674]: 1.5,
                     [Subject.Apl627]: 1.5,
                     [Subject.Apl660]: 1.5,
                     [Subject.Apl691]: 1.5,
+                    [Subject.Apl669]: 1.5,
                     [Subject.Apl713]: 1.5,
                     [Subject.Apl722]: 1.5,
                     [Subject.Apl714]: 1.5,
@@ -343,7 +546,16 @@ export const eduhkProgrammes: Programme[] = [
     {
         id: "JS8727",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: eduhkCommonReq,
+        weighting: sequence(
+            discardCS,
+            modify(
+                multiply({
+                    [Subject.Chi]: 1.5,
+                    [Subject.Eng]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
 ]
