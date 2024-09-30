@@ -6,7 +6,12 @@ import {
     mapCatC_cityu,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne, requireMultiple } from "../requirements"
+import {
+    minimum,
+    minimumOne,
+    requireMultiple,
+    unknownRequirement,
+} from "../requirements"
 import {
     aplCivilElectricalAndMechanicalEngineering,
     aplDesignStudies,
@@ -36,6 +41,7 @@ import {
     scaleSubjects,
     avoid,
     discardCategoryBExcept,
+    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -343,6 +349,12 @@ export const cityuProgrammes: Programme[] = [
         weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
+        id: "JS1040",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
         id: "JS1041",
         mapGrades,
         requirement: r332_33_media,
@@ -400,6 +412,12 @@ export const cityuProgrammes: Programme[] = [
         ),
     },
     {
+        id: "JS1050",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
         id: "JS1051",
         mapGrades,
         requirement: r332_33_sci,
@@ -430,6 +448,12 @@ export const cityuProgrammes: Programme[] = [
         ),
     },
     {
+        id: "JS1053",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
         id: "JS1061",
         mapGrades,
         requirement: r352_33,
@@ -453,6 +477,12 @@ export const cityuProgrammes: Programme[] = [
             ),
             select(choose(Subject.Eng), chooseBest(4)),
         ),
+    },
+    {
+        id: "JS1070",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS1071",
@@ -501,6 +531,12 @@ export const cityuProgrammes: Programme[] = [
             ),
             w3C2X,
         ),
+    },
+    {
+        id: "JS1100",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS1102",
@@ -597,21 +633,6 @@ export const cityuProgrammes: Programme[] = [
         ),
     },
     {
-        id: "JS1110",
-        mapGrades,
-        requirement: r332_33,
-        weighting: sequence(
-            discardCS,
-            discardCategoryB,
-            modify(
-                multiply({
-                    [Subject.Eng]: 2,
-                }),
-            ),
-            select(choose(Subject.Eng), chooseBest(3)),
-        ),
-    },
-    {
         id: "JS1111",
         mapGrades,
         requirement: r332_33,
@@ -655,12 +676,6 @@ export const cityuProgrammes: Programme[] = [
             ),
             select(choose(Subject.Eng), chooseBest(3)),
         ),
-    },
-    {
-        id: "JS1122",
-        mapGrades,
-        requirement: r352_33,
-        weighting: sequence(discardCS, discardCategoryB, w3C2X),
     },
     {
         id: "JS1123",
@@ -1104,39 +1119,16 @@ export const cityuProgrammes: Programme[] = [
         ),
     },
     {
-        id: "JS1220",
+        id: "JS1218",
         mapGrades,
-        requirement: select(
-            minimum({
-                [Subject.Chi]: 3,
-                [Subject.Eng]: 5,
-                [Subject.Maths]: 3,
-                [Subject.CS]: 1,
-            }),
-            minimumOne(
-                [
-                    Subject.BAFS,
-                    Subject.Chem,
-                    Subject.M1,
-                    Subject.M2,
-                    Subject.Phys,
-                ],
-                3,
-            ),
-            minimumOne(validSubjects, 3),
-        ),
-        weighting: sequence(
-            discardCS,
-            discardCategoryB,
-            modify(
-                multiply({
-                    [Subject.Eng]: 1.5,
-                    [Subject.M1]: 1.5,
-                    [Subject.M2]: 1.5,
-                }),
-            ),
-            select(choose(Subject.Eng, Subject.Maths), chooseBest(2)),
-        ),
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS1219",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS1221",

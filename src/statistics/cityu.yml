@@ -54,6 +54,10 @@ JS1027:
   UQ:
   M:
   LQ:
+JS1040:
+  UQ:
+  M:
+  LQ:
 JS1041:
   UQ:
   M:
@@ -70,6 +74,10 @@ JS1044:
   UQ:
   M:
   LQ:
+JS1050:
+  UQ:
+  M:
+  LQ:
 JS1051:
   UQ:
   M:
@@ -78,11 +86,19 @@ JS1052:
   UQ:
   M:
   LQ:
+JS1053:
+  UQ:
+  M:
+  LQ:
 JS1061:
   UQ:
   M:
   LQ:
 JS1062:
+  UQ:
+  M:
+  LQ:
+JS1070:
   UQ:
   M:
   LQ:
@@ -95,6 +111,10 @@ JS1072:
   M:
   LQ:
 JS1074:
+  UQ:
+  M:
+  LQ:
+JS1100:
   UQ:
   M:
   LQ:
@@ -122,10 +142,6 @@ JS1109:
   UQ:
   M:
   LQ:
-JS1110:
-  UQ:
-  M:
-  LQ:
 JS1111:
   UQ:
   M:
@@ -135,10 +151,6 @@ JS1112:
   M:
   LQ:
 JS1113:
-  UQ:
-  M:
-  LQ:
-JS1122:
   UQ:
   M:
   LQ:
@@ -194,7 +206,11 @@ JS1217:
   UQ:
   M:
   LQ:
-JS1220:
+JS1218:
+  UQ:
+  M:
+  LQ:
+JS1219:
   UQ:
   M:
   LQ:

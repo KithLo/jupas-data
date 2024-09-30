@@ -10,7 +10,12 @@ import {
     mapCatC_hkmu,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne, requireMultiple } from "../requirements"
+import {
+    minimum,
+    minimumOne,
+    requireMultiple,
+    unknownRequirement,
+} from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
@@ -27,6 +32,7 @@ import {
     discardCS,
     multiply,
     multiplyAll,
+    unknownWeighting,
     w3C2X,
 } from "../weightings"
 
@@ -336,6 +342,12 @@ export const sssdpProgrammes: Programme[] = [
         weighting: twcWeighting,
     },
     {
+        id: "JSST07",
+        mapGrades: twcMapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
         id: "JSSU12",
         mapGrades: muMapGrades,
         requirement: muRequirement,
@@ -416,12 +428,6 @@ export const sssdpProgrammes: Programme[] = [
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
-        id: "JSSU68",
-        mapGrades: muMapGrades,
-        requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
-    },
-    {
         id: "JSSU69",
         mapGrades: muMapGrades,
         requirement: muRequirement,
@@ -462,6 +468,12 @@ export const sssdpProgrammes: Programme[] = [
         mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(muConfig, chooseBest(5)),
+    },
+    {
+        id: "JSSU90",
+        mapGrades: muMapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JSSU95",
@@ -536,6 +548,12 @@ export const sssdpProgrammes: Programme[] = [
         weighting: theiConfig,
     },
     {
+        id: "JSSV13",
+        mapGrades: theiMapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
         id: "JSSW01",
         mapGrades: uowchkMapGrades,
         requirement: basicRequirement,
@@ -552,5 +570,11 @@ export const sssdpProgrammes: Programme[] = [
         mapGrades: hksyuMapGrades,
         requirement: basicRequirement,
         weighting: hksyuConfig,
+    },
+    {
+        id: "JSSY02",
+        mapGrades: hksyuMapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
 ]

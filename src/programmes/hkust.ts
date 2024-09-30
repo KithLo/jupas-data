@@ -8,7 +8,7 @@ import {
     mapCatC_hkust,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne } from "../requirements"
+import { minimum, minimumOne, unknownRequirement } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
@@ -28,6 +28,7 @@ import {
     multiply,
     multiplySome,
     scaleSubjects,
+    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -283,10 +284,46 @@ export const hkustProgrammes: Programme[] = [
         }),
     },
     {
-        id: "JS5200",
+        id: "JS5212",
         mapGrades,
-        requirement: rEngg,
-        weighting: wEngg,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS5220",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS5230",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS5240",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS5250",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS5260",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS5270",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS5282",

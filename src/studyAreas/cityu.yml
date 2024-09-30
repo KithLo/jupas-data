@@ -30,40 +30,71 @@ JS1026:
   - Business
 JS1027:
   - Business
+JS1040:
+  - Arts
+  - Computing
+  - Communication
 JS1041:
   - Arts
   - Computing
+  - Communication
 JS1042:
   - Arts
   - Computing
+  - Communication
 JS1043:
+  - AI
   - Computing
+  - Communication
 JS1044:
   - Arts
   - Computing
+  - Communication
+JS1050:
+  - Engineering
+  - Science
 JS1051:
   - Engineering
 JS1052:
   - Business
   - Engineering
+JS1053:
+  - Business
+  - Engineering
+  - Science
+  - SocialPolicy
 JS1061:
   - Law
 JS1062:
   - Business
   - Law
+JS1070:
+  - AI
+  - Business
+  - Computing
+  - Engineering
+  - Science
 JS1071:
+  - AI
   - Business
   - Computing
   - Engineering
   - Science
 JS1072:
+  - AI
   - Business
   - Computing
   - Science
 JS1074:
+  - AI
   - Business
   - Computing
   - Engineering
+JS1100:
+  - Arts
+  - Psychology
+  - SocialSciences
+  - Sociology
 JS1102:
   - Arts
   - SocialSciences
@@ -78,26 +109,24 @@ JS1108:
   - SocialSciences
 JS1109:
   - Arts
-  - Communication
   - Computing
+  - Communication
   - Education
-JS1110:
-  - SocialSciences
-  - SocialWork
 JS1111:
   - SocialSciences
+  - Sociology
 JS1112:
+  - Psychology
   - SocialSciences
 JS1113:
+  - SocialPolicy
   - SocialSciences
   - SocialWork
-JS1122:
-  - Law
-  - SocialSciences
 JS1123:
   - Law
   - SocialSciences
 JS1200:
+  - AI
   - Science
 JS1201:
   - Building
@@ -107,8 +136,10 @@ JS1202:
 JS1204:
   - Computing
 JS1205:
+  - AI
   - Engineering
 JS1206:
+  - AI
   - Computing
   - Engineering
   - Science
@@ -122,18 +153,18 @@ JS1210:
 JS1211:
   - Engineering
 JS1216:
-  - Computing
   - Engineering
 JS1217:
   - Building
   - Computing
   - Engineering
-JS1220:
+JS1218:
   - Computing
+JS1219:
+  - AI
   - Engineering
-  - Law
-  - Science
 JS1221:
+  - AI
   - Business
   - Computing
 JS1801:

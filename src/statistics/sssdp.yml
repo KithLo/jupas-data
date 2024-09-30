@@ -78,6 +78,10 @@ JSST07:
   UQ:
   M:
   LQ:
+JSST08:
+  UQ:
+  M:
+  LQ:
 JSSU12:
   UQ:
   M:
@@ -114,10 +118,6 @@ JSSU67:
   UQ:
   M:
   LQ:
-JSSU68:
-  UQ:
-  M:
-  LQ:
 JSSU69:
   UQ:
   M:
@@ -143,6 +143,10 @@ JSSU79:
   M:
   LQ:
 JSSU90:
+  UQ:
+  M:
+  LQ:
+JSSU93:
   UQ:
   M:
   LQ:
@@ -194,6 +198,10 @@ JSSV10:
   UQ:
   M:
   LQ:
+JSSV13:
+  UQ:
+  M:
+  LQ:
 JSSW01:
   UQ:
   M:
@@ -203,6 +211,10 @@ JSSW02:
   M:
   LQ:
 JSSY01:
+  UQ:
+  M:
+  LQ:
+JSSY02:
   UQ:
   M:
   LQ:

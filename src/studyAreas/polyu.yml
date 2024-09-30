@@ -1,12 +1,38 @@
-JS3011:
-  - Science
-JS3020:
+JS3000:
+  - AI
+  - Arts
+  - Building
   - Business
   - Computing
+  - Communication
+  - Design
+  - Engineering
+  - Medicine
   - Science
-JS3030:
+  - SocialPolicy
+  - SocialSciences
+  - SocialWork
+JS3003:
+  - Business
+JS3004:
+  - Building
+JS3005:
+  - Business
   - Computing
   - Engineering
+  - Science
+JS3006:
+  - AI
+  - Computing
+  - Science
+JS3007:
+  - Arts
+  - Communication
+JS3008:
+  - Science
+JS3011:
+  - Science
+JS3030:
   - Science
 JS3050:
   - Design
@@ -16,71 +42,66 @@ JS3070:
   - Business
 JS3080:
   - Business
-JS3100:
-  - Building
-  - Business
-  - Engineering
-JS3110:
-  - Building
-  - Engineering
-  - Science
-JS3120:
-  - Building
-  - Engineering
-  - Science
 JS3130:
-  - Building
-  - Computing
+  - Engineering
 JS3140:
-  - Business
-  - Computing
   - Engineering
 JS3150:
   - Engineering
-  - Medicine
   - Science
 JS3170:
-  - Computing
   - Engineering
 JS3180:
   - Computing
   - Engineering
+JS3211:
+  - Building
+  - Engineering
+  - Science
+JS3214:
+  - Building
+JS3220:
+  - AI
+  - Science
+JS3223:
+  - AI
+JS3236:
+  - Engineering
+JS3237:
+  - Business
+  - Engineering
 JS3240:
   - Arts
+JS3241:
+  - AI
   - Communication
+JS3242:
+  - Medicine
 JS3250:
+  - SocialPolicy
   - SocialSciences
   - SocialWork
+JS3255:
+  - Science
 JS3290:
   - Medicine
 JS3310:
   - Business
 JS3320:
   - Arts
-  - Communication
   - Philosophy
-JS3330:
-  - Arts
-  - Communication
 JS3337:
   - Medicine
+JS3375:
+  - Engineering
 JS3478:
   - Medicine
-  - Science
-JS3557:
-  - Business
-  - Engineering
-  - Science
 JS3569:
   - Arts
   - Building
+  - Computing
   - Communication
-  - Computing
   - Design
-JS3571:
-  - Business
-  - Computing
-  - Engineering
 JS3612:
   - Medicine
 JS3624:
@@ -89,13 +110,13 @@ JS3636:
   - Medicine
 JS3648:
   - Medicine
-JS3741:
-  - Business
-  - Computing
-  - Design
+JS3739:
   - Engineering
-  - Science
+JS3741:
+  - Engineering
+JS3789:
+  - Building
+JS3791:
+  - Building
 JS3868:
   - Computing
-JS3910:
-  - Science

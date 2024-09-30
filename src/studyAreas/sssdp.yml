@@ -8,8 +8,8 @@ JSSA04:
   - Computing
 JSSA05:
   - Arts
-  - Communication
   - Computing
+  - Communication
 JSSA06:
   - Business
 JSSC02:
@@ -20,19 +20,21 @@ JSSH02:
   - Business
   - Science
 JSSH03:
+  - AI
   - Computing
 JSSH04:
   - Business
   - Computing
   - Science
 JSSH05:
+  - AI
   - Business
   - Computing
 JSSH06:
   - Arts
   - Building
-  - Communication
   - Computing
+  - Communication
   - Design
   - Music
   - Philosophy
@@ -52,17 +54,19 @@ JSST06:
 JSST07:
   - Business
   - Medicine
+JSST08:
+  - Medicine
 JSSU12:
   - Arts
   - Communication
 JSSU14:
   - Arts
-  - Communication
   - Computing
+  - Communication
 JSSU15:
   - Arts
-  - Communication
   - Computing
+  - Communication
 JSSU18:
   - Arts
   - Computing
@@ -79,14 +83,11 @@ JSSU61:
 JSSU67:
   - Medicine
   - Science
-JSSU68:
-  - Science
 JSSU69:
   - Science
 JSSU70:
+  - AI
   - Computing
-  - Engineering
-  - Science
 JSSU72:
   - Computing
 JSSU77:
@@ -100,6 +101,8 @@ JSSU79:
   - Engineering
   - Science
 JSSU90:
+  - Business
+JSSU93:
   - Business
 JSSU95:
   - Business
@@ -124,12 +127,19 @@ JSSV08:
   - Building
 JSSV09:
   - Business
+  - Sports
 JSSV10:
   - Engineering
+JSSV13:
+  - Sports
 JSSW01:
   - Business
 JSSW02:
   - Business
 JSSY01:
+  - AI
   - Business
+  - Computing
+JSSY02:
+  - AI
   - Computing

@@ -1,16 +1,44 @@
 JS5101:
   - Science
 JS5102:
+  - AI
   - Science
 JS5103:
   - Science
 JS5181:
+  - AI
   - Science
-JS5200:
+JS5212:
+  - AI
+  - Computing
+  - Engineering
+JS5220:
+  - AI
+  - Computing
+  - Education
+  - Engineering
+  - Medicine
+  - SocialSciences
+JS5230:
+  - AI
   - Building
+  - Engineering
+  - Science
+JS5240:
+  - AI
+  - Computing
+  - Engineering
+JS5250:
+  - AI
   - Computing
   - Engineering
   - Science
+JS5260:
+  - AI
+  - Business
+  - Engineering
+JS5270:
+  - Engineering
 JS5282:
   - Building
   - Computing

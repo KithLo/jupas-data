@@ -1,6 +1,7 @@
 JS9009:
   - SocialSciences
 JS9010:
+  - Psychology
   - SocialSciences
 JS9011:
   - Arts
@@ -9,14 +10,12 @@ JS9013:
   - Communication
 JS9016:
   - Arts
-  - Communication
   - Computing
+  - Communication
 JS9019:
   - Arts
   - Communication
 JS9220:
-  - Business
-JS9223:
   - Business
 JS9230:
   - Business
@@ -25,6 +24,8 @@ JS9240:
 JS9262:
   - Business
 JS9266:
+  - Business
+JS9276:
   - Business
 JS9280:
   - Business
@@ -37,11 +38,15 @@ JS9520:
   - Communication
   - Education
 JS9530:
+  - Arts
   - Communication
   - Education
 JS9540:
   - Communication
 JS9550:
+  - Communication
+JS9555:
+  - Arts
   - Communication
 JS9560:
   - Communication
@@ -59,8 +64,12 @@ JS9731:
 JS9732:
   - Science
 JS9733:
-  - Building
+  - AI
   - Computing
   - Education
+  - Engineering
+  - Science
+JS9776:
+  - Building
   - Engineering
   - Science

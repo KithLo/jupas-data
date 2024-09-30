@@ -4,10 +4,6 @@ JS4006:
 JS4018:
   - Arts
   - Communication
-JS4020:
-  - Arts
-JS4022:
-  - Arts
 JS4032:
   - Arts
   - Communication
@@ -27,6 +23,8 @@ JS4082:
 JS4094:
   - Arts
   - Philosophy
+JS4100:
+  - Arts
 JS4109:
   - Arts
   - Philosophy
@@ -52,15 +50,20 @@ JS4252:
   - Business
 JS4254:
   - Business
+  - SocialSciences
 JS4264:
   - Business
   - Law
 JS4276:
   - Business
   - Science
+JS4320:
+  - Science
+  - Sports
 JS4329:
   - Education
   - Science
+  - Sports
 JS4331:
   - Communication
   - Education
@@ -82,17 +85,21 @@ JS4408:
   - Engineering
   - Science
 JS4412:
+  - AI
   - Computing
   - Engineering
 JS4416:
+  - AI
   - Computing
   - Engineering
   - Science
 JS4428:
   - Engineering
 JS4434:
+  - AI
   - Engineering
 JS4446:
+  - AI
   - Computing
   - Engineering
 JS4458:
@@ -105,6 +112,7 @@ JS4462:
   - Engineering
   - Science
 JS4468:
+  - AI
   - Computing
   - Engineering
   - Medicine
@@ -124,6 +132,7 @@ JS4542:
 JS4550:
   - Medicine
 JS4601:
+  - AI
   - Science
 JS4648:
   - Science
@@ -139,6 +148,7 @@ JS4725:
   - Medicine
   - Science
 JS4733:
+  - AI
   - Computing
   - Engineering
   - Science
@@ -147,6 +157,7 @@ JS4750:
   - Science
   - SocialSciences
 JS4760:
+  - AI
   - Business
   - Computing
   - Engineering
@@ -160,8 +171,6 @@ JS4824:
   - Business
   - SocialSciences
 JS4836:
-  - Arts
-  - Business
   - SocialSciences
 JS4838:
   - Arts
@@ -181,10 +190,11 @@ JS4858:
 JS4862:
   - SocialSciences
 JS4874:
+  - SocialPolicy
   - SocialSciences
   - SocialWork
 JS4886:
-  - SocialSciences
+  - Sociology
 JS4892:
   - SocialSciences
 JS4893:

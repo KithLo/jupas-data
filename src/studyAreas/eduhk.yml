@@ -1,56 +1,82 @@
-JS8105:
+JS8001:
+  - Arts
   - Education
-JS8222:
+  - Music
+JS8002:
+  - Arts
   - Education
-JS8234:
+JS8003:
+  - Communication
   - Education
-JS8246:
+JS8004:
+  - Communication
   - Education
-JS8325:
+JS8005:
+  - Arts
   - Education
-JS8361:
+JS8006:
   - Education
-JS8371:
+  - Psychology
+  - SocialSciences
+JS8007:
+  - Business
   - Education
-JS8381:
+JS8008:
+  - AI
+  - Computing
   - Education
-JS8404:
+  - Science
+JS8009:
+  - AI
+  - Computing
   - Education
-JS8428:
+JS8010:
   - Education
-JS8430:
+  - Sports
+JS8011:
   - Education
+  - Science
+JS8012:
+  - Education
+  - SocialSciences
+  - Sociology
+JS8013:
+  - Arts
+  - SocialSciences
+  - Sociology
 JS8507:
   - Education
-JS8600:
-  - Arts
-JS8612:
-  - Arts
-JS8636:
-  - Arts
-JS8648:
-  - Arts
 JS8651:
+  - Psychology
   - SocialSciences
 JS8663:
   - Arts
+  - Education
+JS8674:
+  - Arts
+  - Communication
 JS8675:
   - Arts
   - Communication
+JS8685:
+  - Arts
+  - Music
+JS8686:
+  - Arts
+  - Design
 JS8687:
   - Arts
+JS8688:
+  - AI
 JS8702:
   - Science
 JS8714:
+  - AI
+  - Computing
+  - Education
   - Science
 JS8726:
   - Science
-JS8801:
-  - Arts
-  - Education
-JS8813:
-  - Arts
-  - Education
-JS8825:
-  - Arts
-  - Education
+  - Sports
+JS8727:
+  - Medicine

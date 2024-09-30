@@ -109,13 +109,6 @@ const hku333 = minimum({
     [Subject.CS]: 1,
 })
 
-const hku352 = minimum({
-    [Subject.Chi]: 3,
-    [Subject.Eng]: 5,
-    [Subject.Maths]: 2,
-    [Subject.CS]: 1,
-})
-
 const catCorM12 = maxCount(1, Subject.M1, Subject.M2, ...categoryCSubjects)
 
 const artWeighting = sequence(
@@ -309,17 +302,6 @@ export const hkuProgrammes: Programme[] = [
         weighting: sequence(discardCategoryC, hkuConfig, chooseBest(5)),
     },
     {
-        id: "JS6212",
-        mapGrades,
-        requirement: select(hku352, hkuElectiveReq, hkuElectiveReq),
-        weighting: sequence(
-            hkuConfig,
-            modify(multiply({ [Subject.Eng]: 1.5 })),
-            catCorM12,
-            chooseBest(5),
-        ),
-    },
-    {
         id: "JS6224",
         mapGrades,
         requirement: select(
@@ -366,16 +348,6 @@ export const hkuProgrammes: Programme[] = [
         mapGrades,
         requirement: select(hku342, hkuElectiveReq, hkuElectiveReq),
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
-    },
-    {
-        id: "JS6262",
-        mapGrades,
-        requirement: select(
-            hku333,
-            minimumOne([Subject.M1, Subject.M2], 3),
-            hkuElectiveReq,
-        ),
-        weighting: engg,
     },
     {
         id: "JS6286",
@@ -428,17 +400,6 @@ export const hkuProgrammes: Programme[] = [
             catCorM12,
             select(chooseBest(5), extraSubject5),
         ),
-    },
-    {
-        id: "JS6470",
-        mapGrades,
-        requirement: select(
-            hku344,
-            minimumOne([Subject.Bio, Subject.Chem], 3),
-            hkuElectiveReq,
-            hkuElectiveReq,
-        ),
-        weighting: sequence(discardCategoryC, hkuConfig, chooseBest(6)),
     },
     {
         id: "JS6482",
@@ -768,16 +729,6 @@ export const hkuProgrammes: Programme[] = [
     },
     {
         id: "JS6951",
-        mapGrades,
-        requirement: select(
-            hku333,
-            minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
-            hkuElectiveReq,
-        ),
-        weighting: engg,
-    },
-    {
-        id: "JS6963",
         mapGrades,
         requirement: select(
             hku333,

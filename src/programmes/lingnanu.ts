@@ -5,7 +5,7 @@ import {
     mapCatC_lingnanu,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne } from "../requirements"
+import { minimum, minimumOne, unknownRequirement } from "../requirements"
 import {
     categoryASubjects,
     categoryCSubjects,
@@ -19,6 +19,7 @@ import {
     discardCS,
     multiply,
     multiplySome,
+    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -111,17 +112,6 @@ export const lingnanuProgrammes: Programme[] = [
         ),
     },
     {
-        id: "JS7200",
-        mapGrades,
-        requirement: r332_22,
-        weighting: lingnanuConfig(
-            multiply({
-                [Subject.Eng]: 2,
-                [Subject.Maths]: 1.5,
-            }),
-        ),
-    },
-    {
         id: "JS7204",
         mapGrades,
         requirement: r332_22,
@@ -133,6 +123,36 @@ export const lingnanuProgrammes: Programme[] = [
                 [Subject.EngLit]: 1.5,
             }),
         ),
+    },
+    {
+        id: "JS7211",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS7212",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS7213",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS7214",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS7215",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS7216",
@@ -237,6 +257,12 @@ export const lingnanuProgrammes: Programme[] = [
                 [Subject.M2]: 1.5,
             }),
         ),
+    },
+    {
+        id: "JS7307",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS7503",

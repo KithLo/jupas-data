@@ -26,10 +26,6 @@ JS9220:
   UQ:
   M:
   LQ:
-JS9223:
-  UQ:
-  M:
-  LQ:
 JS9230:
   UQ:
   M:
@@ -43,6 +39,10 @@ JS9262:
   M:
   LQ:
 JS9266:
+  UQ:
+  M:
+  LQ:
+JS9276:
   UQ:
   M:
   LQ:
@@ -74,6 +74,10 @@ JS9550:
   UQ:
   M:
   LQ:
+JS9555:
+  UQ:
+  M:
+  LQ:
 JS9560:
   UQ:
   M:
@@ -99,6 +103,10 @@ JS9732:
   M:
   LQ:
 JS9733:
+  UQ:
+  M:
+  LQ:
+JS9776:
   UQ:
   M:
   LQ:

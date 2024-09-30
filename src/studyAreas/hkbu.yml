@@ -9,8 +9,8 @@ JS2025:
   - Philosophy
 JS2060:
   - Arts
-  - Communication
   - Computing
+  - Communication
   - Education
   - Music
 JS2110:
@@ -21,8 +21,8 @@ JS2120:
 JS2310:
   - Arts
   - Business
-  - Communication
   - Computing
+  - Communication
   - SocialSciences
 JS2330:
   - Arts
@@ -31,8 +31,8 @@ JS2340:
   - Arts
 JS2370:
   - Arts
-  - Communication
   - Computing
+  - Communication
   - Design
 JS2410:
   - Medicine
@@ -48,8 +48,8 @@ JS2510:
 JS2610:
   - Arts
   - Business
-  - Communication
   - Computing
+  - Communication
   - Education
   - SocialSciences
 JS2620:
@@ -82,11 +82,16 @@ JS2940:
 JS2950:
   - Arts
   - Business
-  - Communication
   - Computing
+  - Communication
   - Education
   - Music
   - Philosophy
   - Science
   - SocialSciences
   - SocialWork
+JS2960:
+  - AI
+  - Arts
+  - Business
+  - Communication

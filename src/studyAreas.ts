@@ -1,4 +1,5 @@
 export enum StudyArea {
+    AI = "AI",
     Arts = "Arts",
     Building = "Building",
     Business = "Business",
@@ -11,7 +12,11 @@ export enum StudyArea {
     Medicine = "Medicine",
     Music = "Music",
     Philosophy = "Philosophy",
+    Psychology = "Psychology",
     Science = "Science",
+    SocialPolicy = "SocialPolicy",
     SocialSciences = "SocialSciences",
     SocialWork = "SocialWork",
+    Sociology = "Sociology",
+    Sports = "Sports",
 }

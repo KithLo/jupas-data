@@ -8,7 +8,7 @@ import {
     mapCatC_cuhk_medic,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne } from "../requirements"
+import { minimum, minimumOne, unknownRequirement } from "../requirements"
 import {
     categoryASubjects,
     categoryCSubjects,
@@ -26,6 +26,7 @@ import {
     multiply,
     multiplySome,
     w3C2X,
+    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -182,18 +183,6 @@ export const cuhkProgrammes: Programme[] = [
         ),
     },
     {
-        id: "JS4020",
-        mapGrades,
-        requirement: r332_33,
-        weighting: sequence(cuhkConfig, chooseBest(5)),
-    },
-    {
-        id: "JS4022",
-        mapGrades,
-        requirement: r332_33,
-        weighting: sequence(cuhkConfig, chooseBest(5)),
-    },
-    {
         id: "JS4032",
         mapGrades,
         requirement: r332_33,
@@ -241,6 +230,12 @@ export const cuhkProgrammes: Programme[] = [
             cuhkConfig,
             select(choose(Subject.Chi, Subject.Eng), chooseBest(3)),
         ),
+    },
+    {
+        id: "JS4100",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS4109",
@@ -385,6 +380,12 @@ export const cuhkProgrammes: Programme[] = [
             ),
             chooseBest(5),
         ),
+    },
+    {
+        id: "JS4100",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS4329",

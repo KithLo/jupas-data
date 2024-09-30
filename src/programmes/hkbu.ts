@@ -7,7 +7,7 @@ import {
     mapCatC_hkbu,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne } from "../requirements"
+import { minimum, minimumOne, unknownRequirement } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
@@ -23,6 +23,7 @@ import {
     discardCategoryC,
     discardCS,
     multiply,
+    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -333,5 +334,11 @@ export const hkbuProgrammes: Programme[] = [
         mapGrades,
         requirement: select(r332, catA3, catMABC3),
         weighting: sequence(hkbuConfig, chooseBest(5)),
+    },
+    {
+        id: "JS2960",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
 ]

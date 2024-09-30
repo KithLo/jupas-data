@@ -8,9 +8,11 @@ JS6028:
   - Computing
 JS6042:
   - Building
+  - SocialSciences
 JS6054:
   - Arts
   - Communication
+  - Education
   - Music
   - Philosophy
 JS6066:
@@ -32,25 +34,15 @@ JS6119:
   - Education
   - Science
 JS6157:
-  - Arts
   - Education
   - Medicine
-JS6212:
-  - Arts
-  - Communication
-  - Computing
-  - Music
-  - Philosophy
-  - Science
-  - SocialSciences
+  - Psychology
 JS6224:
-  - Arts
-  - Building
+  - AI
   - Business
   - Computing
-  - Engineering
   - Medicine
-  - Science
+  - Psychology
   - SocialSciences
 JS6236:
   - Arts
@@ -58,8 +50,9 @@ JS6236:
   - Design
   - Science
 JS6248:
-  - Business
+  - AI
   - Computing
+  - Engineering
 JS6250:
   - Arts
   - Building
@@ -68,17 +61,14 @@ JS6250:
   - Medicine
   - Science
   - SocialSciences
-JS6262:
-  - Computing
-  - Engineering
-  - Science
 JS6286:
+  - AI
   - Arts
-  - Communication
   - Computing
+  - Communication
+  - Education
   - Music
   - Philosophy
-  - Science
 JS6406:
   - Law
 JS6418:
@@ -87,11 +77,6 @@ JS6456:
   - Medicine
 JS6468:
   - Medicine
-JS6470:
-  - Computing
-  - Engineering
-  - Medicine
-  - Science
 JS6482:
   - Medicine
 JS6494:
@@ -99,17 +84,21 @@ JS6494:
 JS6688:
   - Science
 JS6705:
+  - Psychology
   - SocialSciences
 JS6717:
   - Arts
   - Communication
+  - Psychology
+  - SocialPolicy
   - SocialSciences
   - SocialWork
+  - Sociology
 JS6729:
+  - AI
   - Business
   - Science
 JS6731:
-  - SocialSciences
   - SocialWork
 JS6755:
   - Business
@@ -118,6 +107,7 @@ JS6767:
 JS6781:
   - Business
 JS6793:
+  - AI
   - Business
   - Computing
 JS6808:
@@ -128,10 +118,9 @@ JS6810:
   - SocialSciences
 JS6822:
   - Communication
-  - SocialSciences
 JS6846:
+  - AI
   - Business
-  - Computing
 JS6858:
   - Law
   - Science
@@ -139,6 +128,7 @@ JS6860:
   - Business
 JS6884:
   - Business
+  - Computing
 JS6896:
   - Business
 JS6901:
@@ -155,15 +145,3 @@ JS6937:
 JS6949:
   - Medicine
   - Science
-JS6951:
-  - Business
-  - Computing
-  - Engineering
-  - Medicine
-  - Science
-JS6963:
-  - Building
-  - Business
-  - Computing
-  - Engineering
-  - Medicine
