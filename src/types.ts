@@ -18,6 +18,7 @@ export type Programme = {
     mapGrades: (grades: SubjectGrades) => SubjectScores
     requirement: Calculation
     weighting: Calculation
+    references?: string[]
 }
 
 export type Grade = {
