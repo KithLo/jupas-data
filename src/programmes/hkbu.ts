@@ -228,10 +228,10 @@ export const hkbuProgrammes: Programme[] = [
             discardCategoryC,
             modify(
                 multiply({
+                    [Subject.Chi]: 1.5,
                     [Subject.Eng]: 1.5,
-                    [Subject.Maths]: 1.5,
                     [Subject.Bio]: 1.5,
-                    [Subject.Chem]: 1.5,
+                    [Subject.Chem]: 1.25,
                 }),
             ),
             chooseBest(5),
@@ -247,9 +247,9 @@ export const hkbuProgrammes: Programme[] = [
             discardCategoryC,
             modify(
                 multiply({
-                    [Subject.Chi]: 1.5,
                     [Subject.Eng]: 1.5,
-                    [Subject.Bio]: 1.5,
+                    [Subject.Maths]: 1.25,
+                    [Subject.Bio]: 1.25,
                     [Subject.Chem]: 1.5,
                 }),
             ),
@@ -281,13 +281,6 @@ export const hkbuProgrammes: Programme[] = [
             hkbuConfig,
             discardCategoryC,
             discardCategoryBExcept(...js2620Apl),
-            modify(
-                multiply({
-                    [Subject.Eng]: 1.25,
-                    [Subject.Maths]: 1.1,
-                    [Subject.VA]: 1.15,
-                }),
-            ),
             chooseBest(5),
         ),
     },
