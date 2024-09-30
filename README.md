@@ -1,3 +1,3 @@
 # Jupas Calculator
 
-[2024](https://kithlo.github.io/jupas-calculator/en/2024)
+[網址連結](https://kithlo.github.io/jupas-calculator/en/latest)
