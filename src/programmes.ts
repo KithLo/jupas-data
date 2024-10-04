@@ -11,6 +11,7 @@ import { lingnanuProgrammes } from "./programmes/lingnanu"
 import { polyuProgrammes } from "./programmes/polyu"
 import { sssdpProgrammes } from "./programmes/sssdp"
 import cityuStatistics from "./statistics/cityu.yml"
+import cityuAltStatistics from "./statistics/cityu_last.yml"
 import cuhkStatistics from "./statistics/cuhk.yml"
 import eduhkStatistics from "./statistics/eduhk.yml"
 import hkbuStatistics from "./statistics/hkbu.yml"
@@ -52,6 +53,7 @@ export const programmes = {
         cityuProgrammes,
         cityuStudyAreas,
         cityuStatistics,
+        cityuAltStatistics,
     ),
     [Institution.EdUHK]: combine(
         eduhkProgrammes,
