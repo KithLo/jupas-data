@@ -191,19 +191,21 @@ const rBioSci = select(
         [Subject.CS]: 1,
     }),
     minimumOne([Subject.Bio, Subject.Chem], 3),
-    minimumOne(
-        [
-            Subject.Bio,
-            Subject.BAFS,
-            Subject.Chem,
-            Subject.DAT,
-            Subject.ICT,
-            Subject.M1,
-            Subject.M2,
-            Subject.Phys,
-            ...bioSciApl,
-        ],
-        3,
+    or(
+        minimumOne(
+            [
+                Subject.Bio,
+                Subject.BAFS,
+                Subject.Chem,
+                Subject.DAT,
+                Subject.ICT,
+                Subject.M1,
+                Subject.M2,
+                Subject.Phys,
+            ],
+            3,
+        ),
+        minimumOne(bioSciApl, 4),
     ),
 )
 
@@ -576,7 +578,7 @@ export const cityuProgrammes: Programme[] = [
                     [Subject.Eng]: 1.5,
                 }),
             ),
-            select(choose(Subject.Eng), chooseBest(3)),
+            select(choose(Subject.Eng), w3C2X),
         ),
     },
     {
@@ -714,7 +716,7 @@ export const cityuProgrammes: Programme[] = [
                     [Subject.Phys]: 2.5,
                 }),
             ),
-            select(choose(Subject.Eng), chooseBest(3)),
+            chooseBest(4),
         ),
     },
     {
