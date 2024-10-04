@@ -51,7 +51,12 @@ const evaluationReducer: Reducer<{
     score: number
 }> = (value, fn, accumulator) => {
     const val = fn(accumulator?.original ?? value)
-    if (val === null) return null
+    if (val === null) {
+        return {
+            accumulator: { original: value, best: {}, score: 0 },
+            value: {},
+        }
+    }
     const score = sum(values(val).filter(isNotNil))
     if (accumulator === undefined) {
         return {
