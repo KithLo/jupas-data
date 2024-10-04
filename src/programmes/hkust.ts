@@ -8,13 +8,14 @@ import {
     mapCatC_hkust,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne, unknownRequirement } from "../requirements"
+import { minimum, minimumOne } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
     categoryCSubjects,
     passFailSubjects,
     Subject,
+    subjects,
 } from "../subjects"
 import { Calculation, Programme, SubjectScores } from "../types"
 import {
@@ -28,7 +29,6 @@ import {
     multiply,
     multiplySome,
     scaleSubjects,
-    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -45,24 +45,13 @@ const extraSubject = (maxScore: number): Calculation => {
     return optional(
         sequence(
             discardCS,
-            scaleSubjects(categoryASubjects, {
+            scaleSubjects(subjects, {
                 8.5: percent(5),
-                7: percent(4.1),
-                5.5: percent(3.2),
-                4: percent(2.4),
-                3: percent(1.8),
+                7: percent(4.12),
+                5.5: percent(3.24),
+                4: percent(2.35),
+                3: percent(1.76),
                 2: 0,
-                1: 0,
-            }),
-            scaleSubjects(categoryBSubjects, {
-                4: percent(2.4),
-                3: percent(1.8),
-            }),
-            scaleSubjects(categoryCSubjects, {
-                7: percent(4.1),
-                5.5: percent(3.2),
-                4: percent(2.4),
-                2.5: 0,
                 1: 0,
             }),
             chooseBest(1),
@@ -272,6 +261,18 @@ export const hkustProgrammes: Programme[] = [
         }),
     },
     {
+        id: "JS5118",
+        mapGrades,
+        requirement: r2Sci,
+        weighting: wSci({
+            [Subject.Bio]: 2,
+            [Subject.Chem]: 2,
+            [Subject.Phys]: 1.5,
+            [Subject.M1]: 1.5,
+            [Subject.M2]: 1.5,
+        }),
+    },
+    {
         id: "JS5181",
         mapGrades,
         requirement: r3Sci,
@@ -286,50 +287,50 @@ export const hkustProgrammes: Programme[] = [
     {
         id: "JS5212",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: rEngg,
+        weighting: wEngg,
         reference: "JS5282",
     },
     {
         id: "JS5220",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: rEngg,
+        weighting: wEngg,
         reference: "JS5200",
     },
     {
         id: "JS5230",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: rEngg,
+        weighting: wEngg,
         reference: "JS5200",
     },
     {
         id: "JS5240",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: rEngg,
+        weighting: wEngg,
         reference: "JS5282",
     },
     {
         id: "JS5250",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: rEngg,
+        weighting: wEngg,
         reference: "JS5200",
     },
     {
         id: "JS5260",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: rEngg,
+        weighting: wEngg,
         reference: "JS5200",
     },
     {
         id: "JS5270",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: rEngg,
+        weighting: wEngg,
         reference: "JS5200",
     },
     {
