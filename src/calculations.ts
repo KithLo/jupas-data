@@ -128,7 +128,7 @@ export const doSelect = toGenerator(selectionReducer)
 export const modify = toMultiple(modificationReducer)
 export const doModify = toGenerator(modificationReducer)
 
-export const evaulate = toMultiple(evaluationReducer)
+export const evaluate = toMultiple(evaluationReducer)
 export const doEvaluate = toGenerator(evaluationReducer)
 
 export const combine = toMultiple(combinationReducer)

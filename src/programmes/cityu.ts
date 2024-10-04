@@ -1,4 +1,4 @@
-import { evaulate, modify, or, select, sequence } from "../calculations"
+import { evaluate, modify, or, select, sequence } from "../calculations"
 import {
     createMapGrades,
     mapCatA_Scaled,
@@ -1087,7 +1087,7 @@ export const cityuProgrammes: Programme[] = [
                     [Subject.Phys]: 2,
                 }),
             ),
-            evaulate(
+            evaluate(
                 select(avoid(Subject.Maths), chooseBest(5)),
                 select(avoid(Subject.M1, Subject.M2), chooseBest(5)),
             ),
