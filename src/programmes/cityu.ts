@@ -1,17 +1,12 @@
 import { evaulate, modify, or, select, sequence } from "../calculations"
 import {
     createMapGrades,
-    mapCatA_Normal,
+    mapCatA_Scaled,
     mapCatB_430,
     mapCatC_cityu,
     mapPassFail,
 } from "../mapGrades"
-import {
-    minimum,
-    minimumOne,
-    requireMultiple,
-    unknownRequirement,
-} from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     aplCivilElectricalAndMechanicalEngineering,
     aplDesignStudies,
@@ -27,6 +22,7 @@ import {
     categoryCSubjects,
     categoryBSubjects,
     passFailSubjects,
+    aplMedicalScienceAndHealthCare,
 } from "../subjects"
 import { Programme } from "../types"
 import {
@@ -41,11 +37,10 @@ import {
     scaleSubjects,
     avoid,
     discardCategoryBExcept,
-    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
-    [categoryASubjects, mapCatA_Normal],
+    [categoryASubjects, mapCatA_Scaled],
     [categoryBSubjects, mapCatB_430],
     [categoryCSubjects, mapCatC_cityu],
     [passFailSubjects, mapPassFail],
@@ -112,6 +107,7 @@ const mediaApl = [
     ...aplPerformingArts,
     ...aplFilmsTvAndBroadcasting,
     ...aplMediaProductionAndPublicRelations,
+    ...aplMedicalScienceAndHealthCare,
     ...aplPsychology,
     ...aplCivilElectricalAndMechanicalEngineering,
     ...aplInformationEngineering,
@@ -197,19 +193,21 @@ const rBioSci = select(
         [Subject.CS]: 1,
     }),
     minimumOne([Subject.Bio, Subject.Chem], 3),
-    minimumOne(
-        [
-            Subject.Bio,
-            Subject.BAFS,
-            Subject.Chem,
-            Subject.DAT,
-            Subject.ICT,
-            Subject.M1,
-            Subject.M2,
-            Subject.Phys,
-            ...bioSciApl,
-        ],
-        3,
+    or(
+        minimumOne(
+            [
+                Subject.Bio,
+                Subject.BAFS,
+                Subject.Chem,
+                Subject.DAT,
+                Subject.ICT,
+                Subject.M1,
+                Subject.M2,
+                Subject.Phys,
+            ],
+            3,
+        ),
+        minimumOne(bioSciApl, 4),
     ),
 )
 
@@ -351,8 +349,16 @@ export const cityuProgrammes: Programme[] = [
     {
         id: "JS1040",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_33_media,
+        weighting: sequence(
+            wMedia,
+            modify(
+                multiply({
+                    [Subject.Eng]: 2,
+                }),
+            ),
+            select(choose(Subject.Eng), chooseBest(4)),
+        ),
     },
     {
         id: "JS1041",
@@ -414,8 +420,17 @@ export const cityuProgrammes: Programme[] = [
     {
         id: "JS1050",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_33_sci,
+        weighting: sequence(
+            discardCS,
+            discardCategoryB,
+            multiplyScience,
+            select(
+                choose(Subject.Eng, Subject.Maths),
+                chooseSome(1, Subject.Bio, Subject.Chem, Subject.Phys),
+                chooseBest(2),
+            ),
+        ),
     },
     {
         id: "JS1051",
@@ -450,8 +465,37 @@ export const cityuProgrammes: Programme[] = [
     {
         id: "JS1053",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r333_33_sci,
+        weighting: sequence(
+            discardCS,
+            discardCategoryB,
+            modify(
+                multiply({
+                    [Subject.Eng]: 2,
+                    [Subject.Maths]: 2.5,
+                }),
+                multiplySome(1, {
+                    [Subject.Bio]: 2.5,
+                    [Subject.Chem]: 2.5,
+                    [Subject.Phys]: 2.5,
+                }),
+                multiplySome(1, {
+                    [Subject.Econ]: 2.5,
+                    [Subject.BAFS]: 2.5,
+                    [Subject.Bio]: 1.5,
+                    [Subject.Chem]: 1.5,
+                    [Subject.Phys]: 1.5,
+                    [Subject.Geog]: 1.5,
+                    [Subject.M1]: 1.5,
+                    [Subject.M2]: 1.5,
+                }),
+            ),
+            select(
+                choose(Subject.Eng, Subject.Maths),
+                chooseSome(1, Subject.Bio, Subject.Chem, Subject.Phys),
+                chooseBest(2),
+            ),
+        ),
     },
     {
         id: "JS1061",
@@ -481,8 +525,18 @@ export const cityuProgrammes: Programme[] = [
     {
         id: "JS1070",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r333_33,
+        weighting: sequence(
+            discardCS,
+            discardCategoryB,
+            modify(
+                multiply({
+                    [Subject.Eng]: 2,
+                    [Subject.Maths]: 2,
+                }),
+            ),
+            w3C2X,
+        ),
     },
     {
         id: "JS1071",
@@ -535,8 +589,17 @@ export const cityuProgrammes: Programme[] = [
     {
         id: "JS1100",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_33,
+        weighting: sequence(
+            discardCS,
+            discardCategoryB,
+            modify(
+                multiply({
+                    [Subject.Eng]: 2,
+                }),
+            ),
+            select(choose(Subject.Eng), chooseBest(3)),
+        ),
     },
     {
         id: "JS1102",
@@ -612,7 +675,7 @@ export const cityuProgrammes: Programme[] = [
                     [Subject.Eng]: 1.5,
                 }),
             ),
-            select(choose(Subject.Eng), chooseBest(3)),
+            select(choose(Subject.Eng), w3C2X),
         ),
     },
     {
@@ -729,7 +792,7 @@ export const cityuProgrammes: Programme[] = [
                     [Subject.Phys]: 2.5,
                 }),
             ),
-            select(choose(Subject.Eng), chooseBest(3)),
+            chooseBest(4),
         ),
     },
     {
@@ -1121,14 +1184,62 @@ export const cityuProgrammes: Programme[] = [
     {
         id: "JS1218",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            minimum({
+                [Subject.Chi]: 3,
+                [Subject.Eng]: 3,
+                [Subject.Maths]: 3,
+                [Subject.CS]: 1,
+            }),
+            rSciIctM12,
+            minimumOne(validSubjects, 3),
+        ),
+        weighting: sequence(discardCS, discardCategoryB, chooseBest(5)),
     },
     {
         id: "JS1219",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            minimum({
+                [Subject.Chi]: 3,
+                [Subject.Eng]: 3,
+                [Subject.Maths]: 2,
+                [Subject.CS]: 1,
+            }),
+            minimumOne(
+                [
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.DAT,
+                    Subject.Econ,
+                    Subject.ICT,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ],
+                3,
+            ),
+            minimumOne(validSubjects, 3),
+        ),
+        weighting: sequence(
+            discardCS,
+            discardCategoryB,
+            modify(
+                multiply({
+                    [Subject.Eng]: 2,
+                    [Subject.Maths]: 2,
+                    [Subject.Bio]: 2,
+                    [Subject.Chem]: 2,
+                    [Subject.DAT]: 2,
+                    [Subject.Econ]: 2,
+                    [Subject.ICT]: 2,
+                    [Subject.M1]: 2,
+                    [Subject.M2]: 2,
+                    [Subject.Phys]: 2,
+                }),
+            ),
+            select(choose(Subject.Eng, Subject.Maths), chooseBest(3)),
+        ),
     },
     {
         id: "JS1221",
