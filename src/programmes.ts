@@ -32,11 +32,17 @@ import polyuStudyAreas from "./studyAreas/polyu.yml"
 import sssdpStudyAreas from "./studyAreas/sssdp.yml"
 import { Programme } from "./types"
 
-function combine(programmes: Programme[], studyAreas: any, statistics: any) {
+function combine(
+    programmes: Programme[],
+    studyAreas: any,
+    statistics: any,
+    altStatistics?: any,
+) {
     return programmes.map((programme) => ({
         ...programme,
         studyAreas: studyAreas[programme.id] || [],
         statistics: pickBy(isNotNil, statistics[programme.id] || {}),
+        altStatistics: pickBy(isNotNil, altStatistics?.[programme.id] || {}),
     }))
 }
 
