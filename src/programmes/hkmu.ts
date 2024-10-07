@@ -93,12 +93,6 @@ export const hkmuProgrammes: Programme[] = [
         weighting: chooseBest(5),
     },
     {
-        id: "JS9223",
-        mapGrades,
-        requirement: muRequirement,
-        weighting: chooseBest(5),
-    },
-    {
         id: "JS9230",
         mapGrades,
         requirement: muRequirement,
