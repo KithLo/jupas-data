@@ -1,4 +1,4 @@
-import { isNotNil, sum, values } from "rambda"
+import { isNotNil, mapObjIndexed, sum, values } from "rambda"
 import { modify, optional, select, sequence } from "../calculations"
 import { maxGrade } from "../grades"
 import {
@@ -15,7 +15,6 @@ import {
     categoryCSubjects,
     passFailSubjects,
     Subject,
-    subjects,
 } from "../subjects"
 import { Calculation, Programme, SubjectScores } from "../types"
 import {
@@ -28,7 +27,6 @@ import {
     discardCS,
     multiply,
     multiplySome,
-    scaleSubjects,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -41,20 +39,13 @@ const mapGrades = createMapGrades([
 const hkustConfig = sequence(discardCS, discardCategoryB)
 
 const extraSubject = (maxScore: number): Calculation => {
-    const percent = (percent: number) => (maxScore * percent) / 100
     return optional(
         sequence(
             discardCS,
-            scaleSubjects(subjects, {
-                8.5: percent(5),
-                7: percent(4.12),
-                5.5: percent(3.24),
-                4: percent(2.35),
-                3: percent(1.76),
-                2: 0,
-                1: 0,
-            }),
             chooseBest(1),
+            mapObjIndexed((value) =>
+                value >= 3 ? (maxScore * value) / 170 : 0,
+            ),
         ),
     )
 }
