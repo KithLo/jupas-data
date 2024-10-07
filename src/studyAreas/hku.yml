@@ -69,6 +69,14 @@ JS6286:
   - Education
   - Music
   - Philosophy
+JS6298:
+  - AI
+  - Arts
+  - Computing
+  - Communication
+  - Education
+  - Music
+  - Philosophy
 JS6406:
   - Law
 JS6418:
@@ -81,6 +89,8 @@ JS6482:
   - Medicine
 JS6494:
   - Medicine
+JS6602:
+  - Science
 JS6688:
   - Science
 JS6705:
@@ -145,3 +155,6 @@ JS6937:
 JS6949:
   - Medicine
   - Science
+JS6999:
+  - AI
+  - Computing
