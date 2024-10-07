@@ -382,7 +382,7 @@ export const cuhkProgrammes: Programme[] = [
         ),
     },
     {
-        id: "JS4100",
+        id: "JS4320",
         mapGrades,
         requirement: unknownRequirement,
         weighting: unknownWeighting,

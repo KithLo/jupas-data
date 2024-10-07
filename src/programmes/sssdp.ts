@@ -342,7 +342,7 @@ export const sssdpProgrammes: Programme[] = [
         weighting: twcWeighting,
     },
     {
-        id: "JSST07",
+        id: "JSST08",
         mapGrades: twcMapGrades,
         requirement: unknownRequirement,
         weighting: unknownWeighting,
