@@ -470,10 +470,10 @@ export const sssdpProgrammes: Programme[] = [
         weighting: sequence(muConfig, chooseBest(5)),
     },
     {
-        id: "JSSU90",
+        id: "JSSU93",
         mapGrades: muMapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: muRequirement,
+        weighting: sequence(muConfig, chooseBest(5)),
     },
     {
         id: "JSSU95",

@@ -6,12 +6,7 @@ import {
     mapCatC_hkmu,
     mapPassFail,
 } from "../mapGrades"
-import {
-    minimum,
-    minimumOne,
-    requireMultiple,
-    unknownRequirement,
-} from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
@@ -20,7 +15,7 @@ import {
     Subject,
 } from "../subjects"
 import { Programme } from "../types"
-import { chooseBest, multiply, unknownWeighting } from "../weightings"
+import { chooseBest, multiply } from "../weightings"
 
 const muRequirement = select(
     minimum({
@@ -124,8 +119,8 @@ export const hkmuProgrammes: Programme[] = [
     {
         id: "JS9276",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: muRequirement,
+        weighting: chooseBest(5),
     },
     {
         id: "JS9280",
@@ -184,8 +179,11 @@ export const hkmuProgrammes: Programme[] = [
     {
         id: "JS9555",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: muRequirement,
+        weighting: sequence(
+            modify(multiply({ [Subject.Chi]: 2, [Subject.Eng]: 2 })),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS9560",
@@ -238,7 +236,7 @@ export const hkmuProgrammes: Programme[] = [
     {
         id: "JS9776",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: muRequirement,
+        weighting: chooseBest(5),
     },
 ]
