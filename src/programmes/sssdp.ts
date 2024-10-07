@@ -83,8 +83,6 @@ const muRequirement = select(
     ),
 )
 
-const muConfig = sequence()
-
 const muMapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Normal_X1],
     [categoryBSubjects, mapCatB_432],
@@ -352,7 +350,6 @@ export const sssdpProgrammes: Programme[] = [
         mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(
-            muConfig,
             modify(multiply({ [Subject.Chi]: 1.5, [Subject.Eng]: 1.5 })),
             chooseBest(5),
         ),
@@ -361,26 +358,25 @@ export const sssdpProgrammes: Programme[] = [
         id: "JSSU14",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU15",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU18",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU40",
         mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(
-            muConfig,
             modify(
                 multiply({
                     [Subject.Bio]: 1.2,
@@ -397,7 +393,6 @@ export const sssdpProgrammes: Programme[] = [
         mapGrades: muMapGrades,
         requirement: muRequirement,
         weighting: sequence(
-            muConfig,
             modify(
                 multiply({
                     [Subject.Bio]: 1.2,
@@ -413,85 +408,85 @@ export const sssdpProgrammes: Programme[] = [
         id: "JSSU55",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU61",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU67",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU69",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU70",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU72",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU77",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU78",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU79",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU90",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU93",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU95",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU96",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSU97",
         mapGrades: muMapGrades,
         requirement: muRequirement,
-        weighting: sequence(muConfig, chooseBest(5)),
+        weighting: chooseBest(5),
     },
     {
         id: "JSSV01",
