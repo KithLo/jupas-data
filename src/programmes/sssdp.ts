@@ -25,6 +25,7 @@ import {
     discardCategoryB,
     discardCategoryC,
     discardCS,
+    maxCount,
     multiply,
     multiplyAll,
     w3C2X,
@@ -47,7 +48,12 @@ const sfuMapGrades = createMapGrades([
     [passFailSubjects, mapPassFail],
 ])
 
-const hsuhkWeighting = discardCS
+const hkchcMapGrades = basicMapGrades
+
+const hsuhkWeighting = sequence(
+    discardCS,
+    maxCount(1, ...categoryBSubjects, ...categoryCSubjects),
+)
 
 const hsuhkMapGrades = basicMapGrades
 
@@ -153,7 +159,7 @@ export const sssdpProgrammes: Programme[] = [
     },
     {
         id: "JSSC02",
-        mapGrades: basicMapGrades,
+        mapGrades: hkchcMapGrades,
         requirement: basicRequirement,
         weighting: basicWeighting,
     },
@@ -203,19 +209,19 @@ export const sssdpProgrammes: Programme[] = [
             discardCategoryC,
             modify(
                 multiply({
-                    [Subject.Chi]: 7,
-                    [Subject.Eng]: 10,
-                    [Subject.Maths]: 10,
-                    [Subject.Bio]: 7,
-                    [Subject.BAFS]: 10,
-                    [Subject.Chem]: 7,
-                    [Subject.Econ]: 10,
-                    [Subject.ICT]: 7,
-                    [Subject.M1]: 10,
-                    [Subject.M2]: 10,
-                    [Subject.Phys]: 10,
+                    [Subject.Chi]: 3,
+                    [Subject.Eng]: 5,
+                    [Subject.Maths]: 5,
+                    [Subject.Bio]: 3,
+                    [Subject.BAFS]: 5,
+                    [Subject.Chem]: 3,
+                    [Subject.Econ]: 5,
+                    [Subject.ICT]: 3,
+                    [Subject.M1]: 5,
+                    [Subject.M2]: 5,
+                    [Subject.Phys]: 5,
                 }),
-                multiplyAll(5),
+                multiplyAll(2),
             ),
             select(choose(Subject.Eng, Subject.Maths), chooseBest(3)),
         ),
@@ -228,19 +234,18 @@ export const sssdpProgrammes: Programme[] = [
             hsuhkWeighting,
             modify(
                 multiply({
-                    [Subject.Chi]: 7,
-                    [Subject.Eng]: 7,
-                    [Subject.Maths]: 10,
-                    [Subject.Bio]: 7,
-                    [Subject.BAFS]: 10,
-                    [Subject.Chem]: 7,
-                    [Subject.Econ]: 10,
-                    [Subject.ICT]: 10,
-                    [Subject.M1]: 10,
-                    [Subject.M2]: 10,
-                    [Subject.Phys]: 10,
+                    [Subject.Chi]: 2,
+                    [Subject.Eng]: 2,
+                    [Subject.Maths]: 3,
+                    [Subject.Bio]: 2,
+                    [Subject.BAFS]: 3,
+                    [Subject.Chem]: 2,
+                    [Subject.Econ]: 3,
+                    [Subject.ICT]: 3,
+                    [Subject.M1]: 3,
+                    [Subject.M2]: 3,
+                    [Subject.Phys]: 3,
                 }),
-                multiplyAll(5),
             ),
             chooseBest(5),
         ),
