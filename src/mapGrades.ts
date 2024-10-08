@@ -298,6 +298,30 @@ export const mapCatC_cityu = (grade: string): number => {
     }
 }
 
+export const mapCatC_polyu = (grade: string): number => {
+    switch (grade) {
+        case "C2":
+        case "N1":
+        case "G6":
+            return 8.5
+        case "C1":
+        case "G5":
+            return 7
+        case "B2":
+        case "N2":
+            return 5.5
+        case "B1":
+        case "G4":
+            return 4
+        case "A2":
+        case "N3":
+        case "G3":
+            return 3
+        default:
+            return 0
+    }
+}
+
 const mapCatC_unknown = (grade: string): number => {
     switch (grade) {
         default:
@@ -306,7 +330,6 @@ const mapCatC_unknown = (grade: string): number => {
 }
 
 export const mapCatC_lingnanu = mapCatC_unknown
-export const mapCatC_polyu = mapCatC_unknown
 export const mapCatC_sssdp = mapCatC_unknown
 export const mapCatC_thei = mapCatC_unknown
 
