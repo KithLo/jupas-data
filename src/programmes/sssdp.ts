@@ -10,12 +10,7 @@ import {
     mapCatC_hkmu,
     mapPassFail,
 } from "../mapGrades"
-import {
-    minimum,
-    minimumOne,
-    requireMultiple,
-    unknownRequirement,
-} from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
@@ -33,7 +28,6 @@ import {
     maxCount,
     multiply,
     multiplyAll,
-    unknownWeighting,
     w3C2X,
 } from "../weightings"
 
@@ -345,8 +339,8 @@ export const sssdpProgrammes: Programme[] = [
     {
         id: "JSST08",
         mapGrades: twcMapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: basicRequirement,
+        weighting: twcWeighting,
     },
     {
         id: "JSSU12",
@@ -548,8 +542,8 @@ export const sssdpProgrammes: Programme[] = [
     {
         id: "JSSV13",
         mapGrades: theiMapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: basicRequirement,
+        weighting: theiConfig,
     },
     {
         id: "JSSW01",
@@ -572,7 +566,7 @@ export const sssdpProgrammes: Programme[] = [
     {
         id: "JSSY02",
         mapGrades: hksyuMapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: basicRequirement,
+        weighting: hksyuConfig,
     },
 ]
