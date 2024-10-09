@@ -1,6 +1,6 @@
 import { isNotNil, pickBy } from "rambda"
 import { Institution } from "./institutions"
-import { cityuProgrammes } from "./programmes/cityu"
+import { cityuhkProgrammes } from "./programmes/cityuhk"
 import { cuhkProgrammes } from "./programmes/cuhk"
 import { eduhkProgrammes } from "./programmes/eduhk"
 import { hkbuProgrammes } from "./programmes/hkbu"
@@ -10,8 +10,8 @@ import { hkustProgrammes } from "./programmes/hkust"
 import { lingnanuProgrammes } from "./programmes/lingnanu"
 import { polyuProgrammes } from "./programmes/polyu"
 import { sssdpProgrammes } from "./programmes/sssdp"
-import cityuStatistics from "./statistics/cityu.yml"
-import cityuAltStatistics from "./statistics/cityu_last.yml"
+import cityuhkStatistics from "./statistics/cityuhk.yml"
+import cityuhkAltStatistics from "./statistics/cityuhk_last.yml"
 import cuhkStatistics from "./statistics/cuhk.yml"
 import eduhkStatistics from "./statistics/eduhk.yml"
 import hkbuStatistics from "./statistics/hkbu.yml"
@@ -21,7 +21,7 @@ import hkustStatistics from "./statistics/hkust.yml"
 import lingnanuStatistics from "./statistics/lingnanu.yml"
 import polyuStatistics from "./statistics/polyu.yml"
 import sssdpStatistics from "./statistics/sssdp.yml"
-import cityuStudyAreas from "./studyAreas/cityu.yml"
+import cityuhkStudyAreas from "./studyAreas/cityuhk.yml"
 import cuhkStudyAreas from "./studyAreas/cuhk.yml"
 import eduhkStudyAreas from "./studyAreas/eduhk.yml"
 import hkbuStudyAreas from "./studyAreas/hkbu.yml"
@@ -49,11 +49,11 @@ function combine(
 
 export const programmes = {
     [Institution.CUHK]: combine(cuhkProgrammes, cuhkStudyAreas, cuhkStatistics),
-    [Institution.CityU]: combine(
-        cityuProgrammes,
-        cityuStudyAreas,
-        cityuStatistics,
-        cityuAltStatistics,
+    [Institution.CityUHK]: combine(
+        cityuhkProgrammes,
+        cityuhkStudyAreas,
+        cityuhkStatistics,
+        cityuhkAltStatistics,
     ),
     [Institution.EdUHK]: combine(
         eduhkProgrammes,

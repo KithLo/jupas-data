@@ -3,7 +3,7 @@ import {
     createMapGrades,
     mapCatA_Scaled,
     mapCatB_430,
-    mapCatC_cityu,
+    mapCatC_cityuhk,
     mapPassFail,
 } from "../mapGrades"
 import { minimum, minimumOne, requireMultiple } from "../requirements"
@@ -42,7 +42,7 @@ import {
 const mapGrades = createMapGrades([
     [categoryASubjects, mapCatA_Scaled],
     [categoryBSubjects, mapCatB_430],
-    [categoryCSubjects, mapCatC_cityu],
+    [categoryCSubjects, mapCatC_cityuhk],
     [passFailSubjects, mapPassFail],
 ])
 
@@ -232,7 +232,7 @@ const wBioSci = sequence(
     w3C2X,
 )
 
-export const cityuProgrammes: Programme[] = [
+export const cityuhkProgrammes: Programme[] = [
     {
         id: "JS1000",
         mapGrades,

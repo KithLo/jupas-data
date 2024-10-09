@@ -1,6 +1,6 @@
 export enum Institution {
     CUHK = "CUHK",
-    CityU = "CityU",
+    CityUHK = "CityUHK",
     EdUHK = "EdUHK",
     HKBU = "HKBU",
     HKMU = "HKMU",

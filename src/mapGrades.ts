@@ -275,7 +275,7 @@ export const mapCatC_hkust = (grade: string): number => {
     }
 }
 
-export const mapCatC_cityu = (grade: string): number => {
+export const mapCatC_cityuhk = (grade: string): number => {
     switch (grade) {
         case "C2":
         case "N1":
