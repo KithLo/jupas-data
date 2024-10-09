@@ -1,4 +1,5 @@
-import { modify, or, select, sequence } from "../calculations"
+import { mapObjIndexed } from "rambda"
+import { modify, optional, or, select, sequence } from "../calculations"
 import {
     createMapGrades,
     mapCatA_Scaled,
@@ -65,6 +66,14 @@ const multiply7 = (...subjects: Subject[]) =>
 
 const multiply5 = (...subjects: Subject[]) =>
     multiply(subjects.reduce((acc, val) => ({ ...acc, [val]: 5 }), {}))
+
+const bonusSubject = optional(
+    sequence(
+        discardCS,
+        chooseBest(1),
+        mapObjIndexed((value) => (value >= 3 ? value : 0)),
+    ),
+)
 
 const js3010Apl = [
     Subject.Apl704,
@@ -257,33 +266,38 @@ export const polyuProgrammes: Programme[] = [
         weighting: sequence(
             discardCategoryBExcept(...js3050Apl),
             polyuConfig,
-            modify(
-                multiply10(
-                    Subject.Bio,
-                    Subject.BAFS,
-                    Subject.Chem,
-                    Subject.ChiHist,
-                    Subject.Econ,
-                    Subject.Geog,
-                    Subject.VA,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.Bio,
+                            Subject.BAFS,
+                            Subject.Chem,
+                            Subject.ChiHist,
+                            Subject.Econ,
+                            Subject.Geog,
+                            Subject.VA,
+                        ),
+                        multiply7(
+                            Subject.Chi,
+                            Subject.DAT,
+                            Subject.Eng,
+                            Subject.Hist,
+                            Subject.ICT,
+                            Subject.Maths,
+                            Subject.M1,
+                            Subject.M2,
+                            Subject.Phys,
+                            Subject.TLFCT,
+                            Subject.TLFST,
+                            Subject.Apl676,
+                        ),
+                        multiplyAll(5),
+                    ),
+                    chooseBest(5),
                 ),
-                multiply7(
-                    Subject.Chi,
-                    Subject.DAT,
-                    Subject.Eng,
-                    Subject.Hist,
-                    Subject.ICT,
-                    Subject.Maths,
-                    Subject.M1,
-                    Subject.M2,
-                    Subject.Phys,
-                    Subject.TLFCT,
-                    Subject.TLFST,
-                    Subject.Apl676,
-                ),
-                multiplyAll(5),
+                bonusSubject,
             ),
-            chooseBest(5),
         ),
     },
     {
@@ -531,6 +545,7 @@ export const polyuProgrammes: Programme[] = [
         mapGrades,
         requirement: unknownRequirement,
         weighting: unknownWeighting,
+        reference: "JS3110",
     },
     {
         id: "JS3214",
@@ -572,28 +587,34 @@ export const polyuProgrammes: Programme[] = [
         weighting: sequence(
             discardCategoryBExcept(...js3240Apl),
             polyuConfig,
-            modify(
-                multiply10(Subject.Chi, Subject.Eng),
-                multiply7(
-                    Subject.BAFS,
-                    Subject.ChiHist,
-                    Subject.ChiLit,
-                    Subject.DAT,
-                    Subject.ERS,
-                    Subject.Geog,
-                    Subject.HMSC,
-                    Subject.Hist,
-                    Subject.ICT,
-                    Subject.EngLit,
-                    Subject.Maths,
-                    Subject.Music,
-                    Subject.THS,
-                    Subject.VA,
-                    ...categoryCSubjects,
+            select(
+                sequence(
+                    modify(
+                        multiply10(Subject.Chi, Subject.Eng),
+                        multiply7(
+                            Subject.BAFS,
+                            Subject.ChiHist,
+                            Subject.ChiLit,
+                            Subject.DAT,
+                            Subject.ERS,
+                            Subject.Geog,
+                            Subject.HMSC,
+                            Subject.Hist,
+                            Subject.ICT,
+                            Subject.EngLit,
+                            Subject.Maths,
+                            Subject.Music,
+                            Subject.THS,
+                            Subject.VA,
+                            ...categoryCSubjects,
+                        ),
+                        multiplyAll(5),
+                    ),
+                    choose(Subject.Chi, Subject.Eng),
+                    chooseBest(3),
                 ),
-                multiplyAll(5),
+                bonusSubject,
             ),
-            select(choose(Subject.Chi, Subject.Eng), chooseBest(3)),
         ),
     },
     {
@@ -632,20 +653,25 @@ export const polyuProgrammes: Programme[] = [
         weighting: sequence(
             discardCategoryB,
             polyuConfig,
-            modify(
-                multiply10(
-                    Subject.Bio,
-                    Subject.Chem,
-                    Subject.Eng,
-                    Subject.Maths,
-                    Subject.M1,
-                    Subject.M2,
-                    Subject.Phys,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.Bio,
+                            Subject.Chem,
+                            Subject.Eng,
+                            Subject.Maths,
+                            Subject.M1,
+                            Subject.M2,
+                            Subject.Phys,
+                        ),
+                        multiply7(Subject.Chi),
+                        multiplyAll(5),
+                    ),
+                    chooseBest(5),
                 ),
-                multiply7(Subject.Chi),
-                multiplyAll(5),
+                bonusSubject,
             ),
-            chooseBest(5),
         ),
     },
     {
@@ -666,18 +692,24 @@ export const polyuProgrammes: Programme[] = [
         weighting: sequence(
             discardCategoryB,
             polyuConfig,
-            modify(
-                multiply10(
-                    Subject.ChiHist,
-                    Subject.Chi,
-                    Subject.ChiLit,
-                    Subject.Eng,
-                    Subject.Hist,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.ChiHist,
+                            Subject.Chi,
+                            Subject.ChiLit,
+                            Subject.Eng,
+                            Subject.Hist,
+                        ),
+                        multiply7(Subject.Maths),
+                        multiplyAll(5),
+                    ),
+                    choose(Subject.Chi, Subject.Eng),
+                    chooseBest(3),
                 ),
-                multiply7(Subject.Maths),
-                multiplyAll(5),
+                bonusSubject,
             ),
-            select(choose(Subject.Chi, Subject.Eng), chooseBest(3)),
         ),
     },
     {
@@ -705,6 +737,7 @@ export const polyuProgrammes: Programme[] = [
         mapGrades,
         requirement: unknownRequirement,
         weighting: unknownWeighting,
+        reference: "JS3120",
     },
     {
         id: "JS3478",
@@ -713,20 +746,25 @@ export const polyuProgrammes: Programme[] = [
         weighting: sequence(
             discardCategoryB,
             polyuConfig,
-            modify(
-                multiply10(
-                    Subject.Bio,
-                    Subject.Chem,
-                    Subject.Chi,
-                    Subject.Eng,
-                    Subject.Maths,
-                    Subject.M1,
-                    Subject.M2,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.Bio,
+                            Subject.Chem,
+                            Subject.Chi,
+                            Subject.Eng,
+                            Subject.Maths,
+                            Subject.M1,
+                            Subject.M2,
+                        ),
+                        multiply7(Subject.Phys),
+                        multiplyAll(5),
+                    ),
+                    chooseBest(5),
                 ),
-                multiply7(Subject.Phys),
-                multiplyAll(5),
+                bonusSubject,
             ),
-            chooseBest(5),
         ),
     },
     {
@@ -902,6 +940,7 @@ export const polyuProgrammes: Programme[] = [
         mapGrades,
         requirement: unknownRequirement,
         weighting: unknownWeighting,
+        reference: "JS3100",
     },
     {
         id: "JS3868",
