@@ -1,31 +1,18 @@
 JSSA01:
-  UQ:
-  M:
-  LQ:
+  M: 16
 JSSA02:
-  UQ:
-  M:
-  LQ:
+  M: 16
 JSSA03:
-  UQ:
-  M:
-  LQ:
+  M: 21
 JSSA04:
-  UQ:
-  M:
-  LQ:
+  M: 16
 JSSA05:
-  UQ:
-  M:
-  LQ:
+  M: 17
 JSSA06:
-  UQ:
-  M:
-  LQ:
+  M: 15
 JSSC02:
-  UQ:
-  M:
-  LQ:
+  UQ: 15
+  LQ: 13
 JSSH01:
   UQ:
   M:
@@ -51,29 +38,19 @@ JSSH06:
   M:
   LQ:
 JSST01:
-  UQ:
-  M:
-  LQ:
+  M: 16.2
 JSST02:
   UQ:
   M:
   LQ:
 JSST03:
-  UQ:
-  M:
-  LQ:
+  M: 24.3
 JSST04:
-  UQ:
-  M:
-  LQ:
+  M: 21.3
 JSST05:
-  UQ:
-  M:
-  LQ:
+  M: 23.7
 JSST06:
-  UQ:
-  M:
-  LQ:
+  M: 18
 JSST07:
   UQ:
   M:
