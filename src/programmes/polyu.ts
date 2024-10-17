@@ -60,14 +60,7 @@ const multiply7 = (...subjects: Subject[]) =>
 const multiply5 = (...subjects: Subject[]) =>
     multiply(subjects.reduce((acc, val) => ({ ...acc, [val]: 5 }), {}))
 
-const js3010Apl = [
-    Subject.Apl704,
-    Subject.Apl665,
-    Subject.Apl627,
-    Subject.Apl592,
-    Subject.Apl618,
-    Subject.Apl660,
-]
+const js3011Apl = [Subject.Apl627, Subject.Apl618, Subject.Apl660]
 
 const js3050Apl = [
     Subject.Apl703,
@@ -105,6 +98,8 @@ const js3240Apl = [
     Subject.Apl691,
     Subject.Apl616,
 ]
+
+const js3290Apl = [Subject.Apl618]
 
 const js3557Apl = [
     Subject.Apl703,
@@ -162,10 +157,10 @@ export const polyuProgrammes: Programme[] = [
         mapGrades,
         requirement: select(
             polyuCore,
-            requireMultiple(2, polyuElective(...js3010Apl)),
+            requireMultiple(2, polyuElective(...js3011Apl)),
         ),
         weighting: sequence(
-            discardCategoryBExcept(...js3010Apl),
+            discardCategoryBExcept(...js3011Apl),
             polyuConfig,
             modify(
                 multiply10(
@@ -173,14 +168,9 @@ export const polyuProgrammes: Programme[] = [
                     Subject.Chem,
                     Subject.Eng,
                     Subject.Maths,
-                ),
-                multiply7(
-                    Subject.Chi,
-                    Subject.M1,
-                    Subject.M2,
                     Subject.Phys,
-                    Subject.Apl660,
                 ),
+                multiply7(Subject.Chi, Subject.M1, Subject.M2, Subject.Apl660),
                 multiplyAll(5),
             ),
             chooseBest(5),
@@ -652,9 +642,12 @@ export const polyuProgrammes: Programme[] = [
     {
         id: "JS3290",
         mapGrades,
-        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3290Apl)),
+        ),
         weighting: sequence(
-            discardCategoryB,
+            discardCategoryBExcept(...js3290Apl),
             polyuConfig,
             modify(
                 multiply10(
