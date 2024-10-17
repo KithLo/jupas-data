@@ -7,12 +7,7 @@ import {
     mapCatC_polyu,
     mapPassFail,
 } from "../mapGrades"
-import {
-    minimum,
-    minimumOne,
-    requireMultiple,
-    unknownRequirement,
-} from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryBSubjects,
@@ -29,7 +24,6 @@ import {
     discardCS,
     multiply,
     multiplyAll,
-    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -75,29 +69,41 @@ const bonusSubject = optional(
     ),
 )
 
-const js3010Apl = [
-    Subject.Apl704,
-    Subject.Apl665,
+const js3005Apl = [Subject.Apl722, Subject.Apl683, Subject.Apl706]
+
+const js3008Apl = [
     Subject.Apl627,
+    Subject.Apl712,
     Subject.Apl592,
     Subject.Apl618,
+    Subject.Apl615,
     Subject.Apl660,
 ]
 
+const js3011Apl = [Subject.Apl627, Subject.Apl618, Subject.Apl660]
+
 const js3050Apl = [
     Subject.Apl703,
+    Subject.Apl720,
+    Subject.Apl731,
     Subject.Apl662,
     Subject.Apl669,
     Subject.Apl693,
+    Subject.Apl718,
     Subject.Apl707,
+    Subject.Apl732,
     Subject.Apl674,
     Subject.Apl627,
     Subject.Apl676,
     Subject.Apl702,
     Subject.Apl610,
+    Subject.Apl618,
+    Subject.Apl725,
     Subject.Apl668,
+    Subject.Apl717,
     Subject.Apl681,
     Subject.Apl660,
+    Subject.Apl719,
     Subject.Apl708,
     Subject.Apl691,
     Subject.Apl706,
@@ -113,7 +119,18 @@ const js3180Apl = [
     Subject.Apl706,
 ]
 
+const js3236Apl = [
+    Subject.Apl703,
+    /* TODO: */
+]
+
+const js3237Apl = [
+    Subject.Apl720,
+    /* TODO: */
+]
+
 const js3240Apl = [
+    /* TODO: changed */
     Subject.Apl662,
     Subject.Apl665,
     Subject.Apl676,
@@ -121,7 +138,15 @@ const js3240Apl = [
     Subject.Apl616,
 ]
 
+const js3255Apl = [
+    Subject.Apl627,
+    /* TODO: */
+]
+
+const js3290Apl = [Subject.Apl618]
+
 const js3569Apl = [
+    /* TODO: changed */
     Subject.Apl662,
     Subject.Apl669,
     Subject.Apl693,
@@ -133,80 +158,21 @@ const js3569Apl = [
     Subject.Apl691,
 ]
 
+const js3741Apl = [Subject.Apl722]
+
 export const polyuProgrammes: Programme[] = [
     {
         id: "JS3000",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(sequence(multiplyAll(7), chooseBest(5)), bonusSubject),
+        ),
     },
     {
         id: "JS3003",
-        mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
-    },
-    {
-        id: "JS3004",
-        mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
-    },
-    {
-        id: "JS3005",
-        mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
-    },
-    {
-        id: "JS3006",
-        mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
-    },
-    {
-        id: "JS3007",
-        mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
-    },
-    {
-        id: "JS3008",
-        mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
-    },
-    {
-        id: "JS3011",
-        mapGrades,
-        requirement: select(
-            polyuCore,
-            requireMultiple(2, polyuElective(...js3010Apl)),
-        ),
-        weighting: sequence(
-            discardCategoryBExcept(...js3010Apl),
-            polyuConfig,
-            modify(
-                multiply10(
-                    Subject.Bio,
-                    Subject.Chem,
-                    Subject.Eng,
-                    Subject.Maths,
-                ),
-                multiply7(
-                    Subject.Chi,
-                    Subject.M1,
-                    Subject.M2,
-                    Subject.Phys,
-                    Subject.Apl660,
-                ),
-                multiplyAll(5),
-            ),
-            chooseBest(5),
-        ),
-    },
-    {
-        id: "JS3020",
         mapGrades,
         requirement: select(polyuCore, requireMultiple(2, polyuElective())),
         weighting: sequence(
@@ -218,13 +184,186 @@ export const polyuProgrammes: Programme[] = [
                     Subject.Bio,
                     Subject.BAFS,
                     Subject.Chem,
-                    Subject.Chi,
+                    Subject.ChiHist,
+                    Subject.ChiLit,
                     Subject.Econ,
-                    Subject.ICT,
+                    Subject.Geog,
+                    Subject.Hist,
+                    Subject.EngLit,
                     Subject.M1,
                     Subject.M2,
                     Subject.Phys,
                 ),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
+    },
+    {
+        id: "JS3004",
+        mapGrades,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.Eng,
+                            Subject.Geog,
+                            Subject.Maths,
+                            Subject.M1,
+                            Subject.M2,
+                            Subject.Phys,
+                        ),
+                        multiply7(
+                            Subject.Bio,
+                            Subject.BAFS,
+                            Subject.Chem,
+                            Subject.Chi,
+                            Subject.DAT,
+                            Subject.Econ,
+                            Subject.ICT,
+                        ),
+                        multiplyAll(5),
+                    ),
+                    chooseBest(5),
+                ),
+                bonusSubject,
+            ),
+        ),
+    },
+    {
+        id: "JS3005",
+        mapGrades,
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3005Apl)),
+        ),
+        weighting: sequence(
+            discardCategoryBExcept(...js3005Apl),
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.BAFS,
+                    Subject.Chem,
+                    Subject.DAT,
+                    Subject.Econ,
+                    Subject.Eng,
+                    Subject.ICT,
+                    Subject.Maths,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                    ...js3005Apl,
+                ),
+                multiply7(
+                    Subject.Chi,
+                    Subject.ChiLit,
+                    Subject.Geog,
+                    Subject.EngLit,
+                ),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
+    },
+    {
+        id: "JS3006",
+        mapGrades,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.BAFS,
+                    Subject.Chem,
+                    Subject.Econ,
+                    Subject.Eng,
+                    Subject.ICT,
+                    Subject.Maths,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ),
+                multiply7(Subject.Chi),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
+    },
+    {
+        id: "JS3007",
+        mapGrades,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(
+                sequence(
+                    modify(
+                        multiply10(Subject.Chi, Subject.Eng),
+                        multiply5(Subject.Music, Subject.PE, Subject.VA),
+                        multiplyAll(7),
+                    ),
+                    chooseBest(5),
+                ),
+                bonusSubject,
+            ),
+        ),
+    },
+    {
+        id: "JS3008",
+        mapGrades,
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3008Apl)),
+        ),
+        weighting: sequence(
+            discardCategoryBExcept(...js3008Apl),
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.BAFS,
+                    Subject.Chem,
+                    Subject.Econ,
+                    Subject.Eng,
+                    Subject.ICT,
+                    Subject.Maths,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ),
+                multiply7(Subject.Chi, Subject.Apl660),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
+    },
+    {
+        id: "JS3011",
+        mapGrades,
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3011Apl)),
+        ),
+        weighting: sequence(
+            discardCategoryBExcept(...js3011Apl),
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Eng,
+                    Subject.Maths,
+                    Subject.Phys,
+                ),
+                multiply7(Subject.Chi, Subject.M1, Subject.M2, Subject.Apl660),
                 multiplyAll(5),
             ),
             chooseBest(5),
@@ -276,21 +415,25 @@ export const polyuProgrammes: Programme[] = [
                             Subject.ChiHist,
                             Subject.Econ,
                             Subject.Geog,
+                            Subject.Hist,
+                            Subject.TLFCT,
                             Subject.VA,
                         ),
                         multiply7(
                             Subject.Chi,
                             Subject.DAT,
                             Subject.Eng,
-                            Subject.Hist,
                             Subject.ICT,
                             Subject.Maths,
                             Subject.M1,
                             Subject.M2,
                             Subject.Phys,
-                            Subject.TLFCT,
                             Subject.TLFST,
+                            Subject.Apl693,
                             Subject.Apl676,
+                            Subject.Apl676,
+                            Subject.Apl717,
+                            Subject.Apl681,
                         ),
                         multiplyAll(5),
                     ),
@@ -543,39 +686,185 @@ export const polyuProgrammes: Programme[] = [
     {
         id: "JS3211",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            modify(
+                multiply10(Subject.Eng, Subject.Maths, Subject.Phys),
+                multiply7(
+                    Subject.Bio,
+                    Subject.BAFS,
+                    Subject.Chem,
+                    Subject.Chi,
+                    Subject.DAT,
+                    Subject.Econ,
+                    Subject.Geog,
+                    Subject.HMSC,
+                    Subject.ICT,
+                    Subject.M1,
+                    Subject.M2,
+                ),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
         reference: "JS3110",
     },
     {
         id: "JS3214",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(
+                sequence(
+                    modify(
+                        multiply10(Subject.Eng),
+                        multiply7(
+                            Subject.Bio,
+                            Subject.BAFS,
+                            Subject.Chem,
+                            Subject.ChiHist,
+                            Subject.Chi,
+                            Subject.ChiLit,
+                            Subject.DAT,
+                            Subject.Econ,
+                            Subject.ERS,
+                            Subject.Geog,
+                            Subject.Hist,
+                            Subject.EngLit,
+                            Subject.Maths,
+                            Subject.M1,
+                            Subject.M2,
+                            Subject.Music,
+                            Subject.Phys,
+                            Subject.THS,
+                            Subject.VA,
+                        ),
+                        multiplyAll(5),
+                    ),
+                    chooseBest(5),
+                ),
+                bonusSubject,
+            ),
+        ),
     },
     {
         id: "JS3220",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            modify(
+                multiply10(Subject.Eng, Subject.Maths),
+                multiply7(
+                    Subject.Bio,
+                    Subject.BAFS,
+                    Subject.Chem,
+                    Subject.Chi,
+                    Subject.Econ,
+                    Subject.ICT,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS3223",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.BAFS,
+                    Subject.Chem,
+                    Subject.Econ,
+                    Subject.Eng,
+                    Subject.ICT,
+                    Subject.Maths,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ),
+                multiply7(Subject.Chi),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS3236",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3236Apl)),
+        ),
+        weighting: sequence(
+            discardCategoryBExcept(...js3236Apl),
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Eng,
+                    Subject.ICT,
+                    Subject.Maths,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ),
+                multiply7(
+                    Subject.BAFS,
+                    Subject.Chi,
+                    Subject.DAT,
+                    Subject.Econ,
+                    ...categoryCSubjects,
+                ),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS3237",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3237Apl)),
+        ),
+        weighting: sequence(
+            discardCategoryBExcept(...js3237Apl),
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.BAFS,
+                    Subject.Econ,
+                    Subject.Eng,
+                    Subject.ICT,
+                    Subject.Maths,
+                ),
+                multiply7(
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Chi,
+                    Subject.DAT,
+                    Subject.Geog,
+                    Subject.Phys,
+                ),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS3240",
@@ -620,14 +909,56 @@ export const polyuProgrammes: Programme[] = [
     {
         id: "JS3241",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(
+                sequence(
+                    modify(
+                        multiply10(Subject.Chi, Subject.Eng, Subject.Maths),
+                        multiply5(
+                            Subject.DAT,
+                            Subject.Music,
+                            Subject.PE,
+                            Subject.TLFCT,
+                            Subject.TLFST,
+                            Subject.VA,
+                        ),
+                        multiplyAll(7),
+                    ),
+                    chooseBest(5),
+                ),
+                bonusSubject,
+            ),
+        ),
     },
     {
         id: "JS3242",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(
+                sequence(
+                    modify(
+                        multiply10(Subject.Chi, Subject.Eng, Subject.Maths),
+                        multiply5(
+                            Subject.DAT,
+                            Subject.Music,
+                            Subject.PE,
+                            Subject.TLFCT,
+                            Subject.TLFST,
+                            Subject.VA,
+                        ),
+                        multiplyAll(7),
+                    ),
+                    chooseBest(5),
+                ),
+                bonusSubject,
+            ),
+        ),
     },
     {
         id: "JS3250",
@@ -643,15 +974,35 @@ export const polyuProgrammes: Programme[] = [
     {
         id: "JS3255",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3255Apl)),
+        ),
+        weighting: sequence(
+            discardCategoryBExcept(...js3255Apl),
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Eng,
+                    Subject.Maths,
+                ),
+                multiply7(Subject.Chi, Subject.M1, Subject.M2, Subject.Phys),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS3290",
         mapGrades,
-        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3290Apl)),
+        ),
         weighting: sequence(
-            discardCategoryB,
+            discardCategoryBExcept(...js3290Apl),
             polyuConfig,
             select(
                 sequence(
@@ -735,8 +1086,28 @@ export const polyuProgrammes: Programme[] = [
     {
         id: "JS3375",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Chi,
+                    Subject.Econ,
+                    Subject.Eng,
+                    Subject.Geog,
+                    Subject.Maths,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ),
+                multiply7(Subject.DAT, Subject.ICT),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
         reference: "JS3120",
     },
     {
@@ -785,6 +1156,7 @@ export const polyuProgrammes: Programme[] = [
                     Subject.ICT,
                     Subject.Maths,
                     Subject.VA,
+                    /* TODO: weighting changes */
                     Subject.Apl702,
                     Subject.Apl668,
                     Subject.Apl681,
@@ -836,10 +1208,15 @@ export const polyuProgrammes: Programme[] = [
             discardCategoryB,
             polyuConfig,
             modify(
-                multiply10(Subject.Bio, Subject.Chi, Subject.Eng, Subject.Phys),
+                multiply10(
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Chi,
+                    Subject.Eng,
+                    Subject.Phys,
+                ),
                 multiply7(
                     Subject.BAFS,
-                    Subject.Chem,
                     Subject.ChiHist,
                     Subject.ChiLit,
                     Subject.DAT,
@@ -866,13 +1243,17 @@ export const polyuProgrammes: Programme[] = [
             discardCategoryB,
             polyuConfig,
             modify(
-                multiply10(Subject.Bio, Subject.Chi, Subject.Eng, Subject.Phys),
-                multiply7(
+                multiply10(
+                    Subject.Bio,
                     Subject.Chem,
-                    Subject.HMSC,
+                    Subject.Chi,
+                    Subject.Eng,
                     Subject.Maths,
-                    Subject.PE,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
                 ),
+                multiply7(Subject.HMSC, Subject.PE),
                 multiplyAll(5),
             ),
             chooseBest(5),
@@ -901,15 +1282,41 @@ export const polyuProgrammes: Programme[] = [
     {
         id: "JS3739",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            modify(
+                multiply10(
+                    Subject.Chem,
+                    Subject.Eng,
+                    Subject.Maths,
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Phys,
+                ),
+                multiply7(
+                    Subject.Bio,
+                    Subject.Chi,
+                    Subject.DAT,
+                    Subject.Econ,
+                    Subject.Geog,
+                    Subject.ICT,
+                ),
+                multiplyAll(5),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS3741",
         mapGrades,
-        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        requirement: select(
+            polyuCore,
+            requireMultiple(2, polyuElective(...js3741Apl)),
+        ),
         weighting: sequence(
-            discardCategoryB,
+            discardCategoryBExcept(...js3741Apl),
             polyuConfig,
             modify(
                 multiply10(
@@ -922,6 +1329,7 @@ export const polyuProgrammes: Programme[] = [
                     Subject.M1,
                     Subject.M2,
                     Subject.Phys,
+                    ...js3741Apl,
                 ),
                 multiply7(Subject.Chi),
                 multiplyAll(5),
@@ -932,14 +1340,62 @@ export const polyuProgrammes: Programme[] = [
     {
         id: "JS3789",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(
+                sequence(
+                    modify(
+                        multiply10(Subject.Eng),
+                        multiply5(
+                            Subject.Music,
+                            Subject.PE,
+                            Subject.TLFCT,
+                            Subject.TLFST,
+                            Subject.VA,
+                            ...categoryCSubjects,
+                        ),
+                        multiplyAll(7),
+                    ),
+                    chooseBest(5),
+                ),
+                bonusSubject,
+            ),
+        ),
     },
     {
         id: "JS3791",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(polyuCore, requireMultiple(2, polyuElective())),
+        weighting: sequence(
+            discardCategoryB,
+            polyuConfig,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.Eng,
+                            Subject.Maths,
+                            Subject.M1,
+                            Subject.M2,
+                            Subject.Phys,
+                        ),
+                        multiply5(
+                            Subject.Music,
+                            Subject.PE,
+                            Subject.TLFCT,
+                            Subject.TLFST,
+                            Subject.VA,
+                            ...categoryCSubjects,
+                        ),
+                        multiplyAll(7),
+                    ),
+                    chooseBest(5),
+                ),
+                bonusSubject,
+            ),
+        ),
         reference: "JS3100",
     },
     {
