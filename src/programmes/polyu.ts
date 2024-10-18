@@ -121,32 +121,61 @@ const js3180Apl = [
 
 const js3236Apl = [
     Subject.Apl703,
-    /* TODO: */
+    Subject.Apl722,
+    Subject.Apl662,
+    Subject.Apl640,
+    Subject.Apl684,
+    Subject.Apl669,
+    Subject.Apl693,
+    Subject.Apl683,
+    Subject.Apl618,
+    Subject.Apl668,
+    Subject.Apl717,
+    Subject.Apl672,
+    Subject.Apl681,
+    Subject.Apl691,
+    Subject.Apl713,
+    Subject.Apl706,
 ]
 
 const js3237Apl = [
     Subject.Apl720,
-    /* TODO: */
+    Subject.Apl662,
+    Subject.Apl640,
+    Subject.Apl693,
+    Subject.Apl718,
+    Subject.Apl615,
+    Subject.Apl672,
+    Subject.Apl681,
+    Subject.Apl691,
 ]
 
 const js3240Apl = [
-    /* TODO: changed */
+    Subject.Apl715,
+    Subject.Apl723,
+    Subject.Apl716,
     Subject.Apl662,
     Subject.Apl665,
+    Subject.Apl728,
+    Subject.Apl729,
     Subject.Apl676,
     Subject.Apl691,
+    Subject.Apl726,
     Subject.Apl616,
 ]
 
 const js3255Apl = [
     Subject.Apl627,
-    /* TODO: */
+    Subject.Apl712,
+    Subject.Apl592,
+    Subject.Apl618,
+    Subject.Apl615,
+    Subject.Apl660,
 ]
 
 const js3290Apl = [Subject.Apl618]
 
 const js3569Apl = [
-    /* TODO: changed */
     Subject.Apl662,
     Subject.Apl669,
     Subject.Apl693,
@@ -899,8 +928,7 @@ export const polyuProgrammes: Programme[] = [
                         ),
                         multiplyAll(5),
                     ),
-                    choose(Subject.Chi, Subject.Eng),
-                    chooseBest(3),
+                    select(choose(Subject.Chi, Subject.Eng), chooseBest(3)),
                 ),
                 bonusSubject,
             ),
@@ -1056,8 +1084,7 @@ export const polyuProgrammes: Programme[] = [
                         multiply7(Subject.Maths),
                         multiplyAll(5),
                     ),
-                    choose(Subject.Chi, Subject.Eng),
-                    chooseBest(3),
+                    chooseBest(5),
                 ),
                 bonusSubject,
             ),
@@ -1156,7 +1183,7 @@ export const polyuProgrammes: Programme[] = [
                     Subject.ICT,
                     Subject.Maths,
                     Subject.VA,
-                    /* TODO: weighting changes */
+                    Subject.Apl669,
                     Subject.Apl702,
                     Subject.Apl668,
                     Subject.Apl681,
@@ -1169,7 +1196,6 @@ export const polyuProgrammes: Programme[] = [
                     Subject.TLFCT,
                     Subject.TLFST,
                     Subject.THS,
-                    Subject.Apl669,
                     Subject.Apl693,
                     Subject.Apl676,
                 ),

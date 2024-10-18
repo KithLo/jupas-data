@@ -58,7 +58,7 @@ export enum Subject {
     // Applied learning subjects
     /** Fashion Image Design */
     Apl676 = "Apl676",
-    /** Interior Design */
+    /** Interior and Exhibition Design */
     Apl668 = "Apl668",
     /** Jewellery Design in Digital Age */
     Apl717 = "Apl717",
@@ -148,11 +148,11 @@ export enum Subject {
     Apl640 = "Apl640",
     /** Railway Studies */
     Apl698 = "Apl698",
-    /** English Communication */
+    /** Vocational English – English Communication */
     Apl715 = "Apl715",
-    /** English for Business Services */
+    /** Vocational English – English for Business Services */
     Apl723 = "Apl723",
-    /** English for Service Professionals */
+    /** Vocational English – English for Service Professionals */
     Apl716 = "Apl716",
     /** Creative English – Biz and Media (new in 2025) */
     Apl728 = "Apl728",
