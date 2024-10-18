@@ -1117,23 +1117,28 @@ export const polyuProgrammes: Programme[] = [
         weighting: sequence(
             discardCategoryB,
             polyuConfig,
-            modify(
-                multiply10(
-                    Subject.Bio,
-                    Subject.Chem,
-                    Subject.Chi,
-                    Subject.Econ,
-                    Subject.Eng,
-                    Subject.Geog,
-                    Subject.Maths,
-                    Subject.M1,
-                    Subject.M2,
-                    Subject.Phys,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.Bio,
+                            Subject.Chem,
+                            Subject.Chi,
+                            Subject.Econ,
+                            Subject.Eng,
+                            Subject.Geog,
+                            Subject.Maths,
+                            Subject.M1,
+                            Subject.M2,
+                            Subject.Phys,
+                        ),
+                        multiply7(Subject.DAT, Subject.ICT),
+                        multiplyAll(5),
+                    ),
+                    chooseBest(5),
                 ),
-                multiply7(Subject.DAT, Subject.ICT),
-                multiplyAll(5),
+                bonusSubject,
             ),
-            chooseBest(5),
         ),
         reference: "JS3120",
     },
@@ -1211,19 +1216,24 @@ export const polyuProgrammes: Programme[] = [
         weighting: sequence(
             discardCategoryB,
             polyuConfig,
-            modify(
-                multiply10(
-                    Subject.Bio,
-                    Subject.Chem,
-                    Subject.Chi,
-                    Subject.Eng,
-                    Subject.Maths,
-                    Subject.Phys,
+            select(
+                sequence(
+                    modify(
+                        multiply10(
+                            Subject.Bio,
+                            Subject.Chem,
+                            Subject.Chi,
+                            Subject.Eng,
+                            Subject.Maths,
+                            Subject.Phys,
+                        ),
+                        multiply7(Subject.M1, Subject.M2),
+                        multiplyAll(5),
+                    ),
+                    chooseBest(5),
                 ),
-                multiply7(Subject.M1, Subject.M2),
-                multiplyAll(5),
+                bonusSubject,
             ),
-            chooseBest(5),
         ),
     },
     {
