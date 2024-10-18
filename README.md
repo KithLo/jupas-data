@@ -22,3 +22,6 @@ Programme requirements / weightings: CUHK, HKBU (new subjects TBC), HKUST (new s
 Admission scores 2024: CUHK, EduHK, HKU, SSSDP
 
 Category C score conversion: LingnanU, SSSDP
+
+Also PolyU JS3569 Lower Quartile is higher than Median.
+Hopefully PolyU will fix its statistics soon.
