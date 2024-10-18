@@ -18,5 +18,7 @@
 ## 2025 Todo list
 
 Programme requirements / weightings: CUHK, HKBU (new subjects TBC), HKUST (new subjects TBC), LingnanU, SSSDP
+
 Admission scores 2024: CUHK, EduHK, HKU, SSSDP
+
 Category C score conversion: LingnanU, SSSDP
