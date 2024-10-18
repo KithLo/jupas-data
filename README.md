@@ -14,3 +14,9 @@
 
 [2025](https://kithlo.github.io/jupas-calculator/en/2025)
 [2024](https://kithlo.github.io/jupas-calculator/en/2024)
+
+## 2025 Todo list
+
+Programme requirements / weightings: CUHK, HKBU (new subjects TBC), HKUST (new subjects TBC), LingnanU, SSSDP
+Admission scores 2024: CUHK, EduHK, HKU, SSSDP
+Category C score conversion: LingnanU, SSSDP
