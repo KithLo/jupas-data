@@ -40,9 +40,7 @@ JSSH06:
 JSST01:
   M: 16.2
 JSST02:
-  UQ:
-  M:
-  LQ:
+  M: 21.2
 JSST03:
   M: 24.3
 JSST04:
@@ -52,9 +50,7 @@ JSST05:
 JSST06:
   M: 18
 JSST07:
-  UQ:
-  M:
-  LQ:
+  M: 15.8
 JSSU12:
   M: 19
   LQ: 17
@@ -155,13 +151,9 @@ JSSV10:
   M:
   LQ:
 JSSW01:
-  UQ:
-  M:
-  LQ:
+  M: 14.3
 JSSW02:
-  UQ:
-  M:
-  LQ:
+  M: 14.3
 JSSY01:
   UQ:
   M:
