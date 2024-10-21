@@ -5,7 +5,7 @@ import {
     mapCatC_lingnanu,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne, unknownRequirement } from "../requirements"
+import { minimum, minimumOne } from "../requirements"
 import {
     categoryASubjects,
     categoryCSubjects,
@@ -19,7 +19,6 @@ import {
     discardCS,
     multiply,
     multiplySome,
-    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -86,12 +85,18 @@ export const lingnanuProgrammes: Programme[] = [
         weighting: lingnanuConfig(
             multiply({
                 [Subject.Eng]: 2,
+                [Subject.Maths]: 1.5,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
                 [Subject.Bio]: 1.25,
                 [Subject.BAFS]: 1.25,
+                [Subject.Chem]: 1.25,
                 [Subject.DAT]: 1.25,
                 [Subject.Econ]: 1.25,
                 [Subject.Geog]: 1.5,
                 [Subject.HMSC]: 1.25,
+                [Subject.ICT]: 1.25,
+                [Subject.Phys]: 1.25,
                 [Subject.TLFCT]: 1.25,
                 [Subject.TLFST]: 1.25,
                 [Subject.THS]: 1.25,
@@ -127,32 +132,78 @@ export const lingnanuProgrammes: Programme[] = [
     {
         id: "JS7211",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_22,
+        weighting: lingnanuConfig(
+            multiply({
+                [Subject.Eng]: 2,
+                [Subject.Maths]: 2,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
+                [Subject.BAFS]: 1.5,
+            }),
+        ),
     },
     {
         id: "JS7212",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_22,
+        weighting: lingnanuConfig(
+            multiply({
+                [Subject.Eng]: 2,
+                [Subject.Maths]: 2,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
+                [Subject.ICT]: 1.5,
+            }),
+        ),
     },
     {
         id: "JS7213",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_22,
+        weighting: lingnanuConfig(
+            multiply({
+                [Subject.Eng]: 2,
+                [Subject.Maths]: 2,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
+                [Subject.BAFS]: 1.5,
+                [Subject.Econ]: 1.5,
+                [Subject.ICT]: 1.5,
+            }),
+        ),
     },
     {
         id: "JS7214",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_22,
+        weighting: lingnanuConfig(
+            multiply({
+                [Subject.Eng]: 2,
+                [Subject.Maths]: 2,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
+                [Subject.BAFS]: 1.5,
+                [Subject.Econ]: 1.5,
+                [Subject.ICT]: 1.5,
+            }),
+        ),
     },
     {
         id: "JS7215",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_22,
+        weighting: lingnanuConfig(
+            multiply({
+                [Subject.Eng]: 2,
+                [Subject.Maths]: 2,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
+                [Subject.BAFS]: 1.5,
+                [Subject.Econ]: 1.5,
+                [Subject.ICT]: 1.5,
+            }),
+        ),
     },
     {
         id: "JS7216",
@@ -161,7 +212,11 @@ export const lingnanuProgrammes: Programme[] = [
         weighting: lingnanuConfig(
             multiply({
                 [Subject.Eng]: 2,
-                [Subject.Maths]: 1.5,
+                [Subject.Maths]: 2,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
+                [Subject.Econ]: 1.5,
+                [Subject.ICT]: 1.5,
             }),
         ),
     },
@@ -261,8 +316,16 @@ export const lingnanuProgrammes: Programme[] = [
     {
         id: "JS7307",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_22,
+        weighting: lingnanuConfig(
+            multiply({
+                [Subject.Eng]: 2,
+                [Subject.Maths]: 1.5,
+                [Subject.M1]: 1.5,
+                [Subject.M2]: 1.5,
+                [Subject.ICT]: 1.5,
+            }),
+        ),
     },
     {
         id: "JS7503",
