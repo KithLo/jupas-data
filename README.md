@@ -17,7 +17,7 @@
 
 ## 2025 Todo list
 
-Programme requirements / weightings: HKBU (new subjects TBC), HKUST (new subjects TBC), LingnanU, SSSDP
+Programme requirements / weightings: HKBU (new subjects TBC), HKUST (new subjects TBC), SSSDP
 
 Admission scores 2024: HKU, SSSDP
 
