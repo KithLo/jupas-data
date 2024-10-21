@@ -1,4 +1,4 @@
-import { difference, omit } from "rambda"
+import { difference } from "rambda"
 import { modify, or, select, sequence } from "../calculations"
 import {
     createMapGrades,
@@ -8,14 +8,14 @@ import {
     mapCatC_Scaled,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne } from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryCSubjects,
     passFailSubjects,
     Subject,
 } from "../subjects"
-import { Programme } from "../types"
+import { Programme, SubjectScores } from "../types"
 import {
     choose,
     chooseBest,
@@ -144,23 +144,45 @@ const rMedic = select(
         [Subject.CS]: 1,
     }),
     minimumOne([Subject.Bio, Subject.Chem], 3),
-    minimumOne(
-        difference(
-            [...categoryASubjects, ...categoryCSubjects],
-            [Subject.M1, Subject.M2],
+    requireMultiple(
+        2,
+        minimumOne(
+            difference(
+                [...categoryASubjects, ...categoryCSubjects],
+                [Subject.M1, Subject.M2],
+            ),
+            3,
         ),
-        3,
     ),
 )
 
 const wMedic = sequence(
     discardCS,
     discardCategoryB,
-    omit([Subject.M1, Subject.M2]),
     select(
         choose(Subject.Chi, Subject.Eng, Subject.Maths),
         chooseSome(1, Subject.Bio, Subject.Chem),
-        chooseBest(2),
+        (input) => {
+            const cloned = { ...input }
+            delete cloned[Subject.M1]
+            delete cloned[Subject.M2]
+            const scores = Object.entries(cloned) as [Subject, number][]
+            if (scores.length <= 1) return null
+            scores.sort((a, b) => b[1] - a[1])
+            const [highestSubject, highestScore] = scores[0]!
+            const [secondHighestSubject, secondHighestScore] = scores[1]!
+            const m1 = input[Subject.M1]
+            const m2 = input[Subject.M2]
+            const m12 = m1 ?? m2
+            const output: SubjectScores = { [highestSubject]: highestScore }
+            if (m12 !== undefined && m12 > secondHighestScore) {
+                output[secondHighestSubject] = secondHighestScore / 2
+                output[m1 ? Subject.M1 : Subject.M2] = m12 / 2
+            } else {
+                output[secondHighestSubject] = secondHighestScore
+            }
+            return output
+        },
     ),
 )
 
@@ -729,7 +751,7 @@ export const cuhkProgrammes: Programme[] = [
                     [Subject.Chem]: 1.5,
                     [Subject.Phys]: 1.5,
                 }),
-                multiplySome(1.5, {
+                multiplySome(1, {
                     [Subject.Maths]: 1.5,
                     [Subject.M1]: 1.5,
                     [Subject.M2]: 1.5,
@@ -885,7 +907,7 @@ export const cuhkProgrammes: Programme[] = [
             minimum({
                 [Subject.Chi]: 3,
                 [Subject.Eng]: 3,
-                [Subject.Maths]: 3,
+                [Subject.Maths]: 2,
                 [Subject.CS]: 1,
             }),
             minimumOne(
@@ -941,7 +963,7 @@ export const cuhkProgrammes: Programme[] = [
                     Subject.Phys,
                     Subject.Geog,
                 ],
-                3,
+                4,
             ),
             catA3,
         ),
