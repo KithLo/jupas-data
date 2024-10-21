@@ -1,4 +1,4 @@
-import { difference, omit } from "rambda"
+import { difference } from "rambda"
 import { modify, or, select, sequence } from "../calculations"
 import {
     createMapGrades,
@@ -8,14 +8,14 @@ import {
     mapCatC_cuhk_medic,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne, unknownRequirement } from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryCSubjects,
     passFailSubjects,
     Subject,
 } from "../subjects"
-import { Programme } from "../types"
+import { Programme, SubjectScores } from "../types"
 import {
     choose,
     chooseBest,
@@ -26,7 +26,6 @@ import {
     multiply,
     multiplySome,
     w3C2X,
-    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -76,6 +75,17 @@ const r453_33 = select(
         [Subject.Chi]: 4,
         [Subject.Eng]: 5.5,
         [Subject.Maths]: 3,
+        [Subject.CS]: 1,
+    }),
+    catA3,
+    catAorC3,
+)
+
+const r454_33 = select(
+    minimum({
+        [Subject.Chi]: 4,
+        [Subject.Eng]: 5.5,
+        [Subject.Maths]: 4,
         [Subject.CS]: 1,
     }),
     catA3,
@@ -145,23 +155,45 @@ const rMedic = select(
         [Subject.CS]: 1,
     }),
     minimumOne([Subject.Bio, Subject.Chem], 3),
-    minimumOne(
-        difference(
-            [...categoryASubjects, ...categoryCSubjects],
-            [Subject.M1, Subject.M2],
+    requireMultiple(
+        2,
+        minimumOne(
+            difference(
+                [...categoryASubjects, ...categoryCSubjects],
+                [Subject.M1, Subject.M2],
+            ),
+            3,
         ),
-        3,
     ),
 )
 
 const wMedic = sequence(
     discardCS,
     discardCategoryB,
-    omit([Subject.M1, Subject.M2]),
     select(
         choose(Subject.Chi, Subject.Eng, Subject.Maths),
         chooseSome(1, Subject.Bio, Subject.Chem),
-        chooseBest(2),
+        (input) => {
+            const cloned = { ...input }
+            delete cloned[Subject.M1]
+            delete cloned[Subject.M2]
+            const scores = Object.entries(cloned) as [Subject, number][]
+            if (scores.length <= 1) return null
+            scores.sort((a, b) => b[1] - a[1])
+            const [highestSubject, highestScore] = scores[0]!
+            const [secondHighestSubject, secondHighestScore] = scores[1]!
+            const m1 = input[Subject.M1]
+            const m2 = input[Subject.M2]
+            const m12 = m1 ?? m2
+            const output: SubjectScores = { [highestSubject]: highestScore }
+            if (m12 !== undefined && m12 > secondHighestScore) {
+                output[secondHighestSubject] = secondHighestScore / 2
+                output[m1 ? Subject.M1 : Subject.M2] = m12 / 2
+            } else {
+                output[secondHighestSubject] = secondHighestScore
+            }
+            return output
+        },
     ),
 )
 
@@ -234,8 +266,8 @@ export const cuhkProgrammes: Programme[] = [
     {
         id: "JS4100",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_33,
+        weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4109",
@@ -304,13 +336,27 @@ export const cuhkProgrammes: Programme[] = [
                     minimum({
                         [Subject.Maths]: 3,
                     }),
-                    minimumOne([Subject.M1, Subject.M2], 5),
+                    minimumOne([Subject.M1, Subject.M2], 5.5),
                     catA3,
                 ),
             ),
         ),
         weighting: sequence(
             cuhkConfig,
+            modify(
+                multiply({
+                    [Subject.Eng]: 1.25,
+                    [Subject.Maths]: 1.5,
+                    [Subject.M1]: 1.5,
+                    [Subject.M2]: 1.5,
+                }),
+                multiplySome(1, {
+                    [Subject.Chem]: 1.25,
+                    [Subject.Phys]: 1.25,
+                    [Subject.Econ]: 1.25,
+                    [Subject.ICT]: 1.25,
+                }),
+            ),
             select(
                 choose(Subject.Eng),
                 chooseSome(1, Subject.Maths, Subject.M1, Subject.M2),
@@ -346,7 +392,7 @@ export const cuhkProgrammes: Programme[] = [
     {
         id: "JS4254",
         mapGrades,
-        requirement: r453_33,
+        requirement: r454_33,
         weighting: sequence(
             cuhkConfig,
             select(choose(Subject.Eng), chooseBest(4)),
@@ -358,7 +404,7 @@ export const cuhkProgrammes: Programme[] = [
         requirement: r453_33,
         weighting: sequence(
             cuhkConfig,
-            modify(multiply({ [Subject.Eng]: 2, [Subject.Chi]: 1.5 })),
+            modify(multiply({ [Subject.Eng]: 2 })),
             w3C2X,
         ),
     },
@@ -384,8 +430,8 @@ export const cuhkProgrammes: Programme[] = [
     {
         id: "JS4320",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: r332_33,
+        weighting: sequence(cuhkConfig, chooseBest(5)),
     },
     {
         id: "JS4329",
@@ -730,7 +776,7 @@ export const cuhkProgrammes: Programme[] = [
                     [Subject.Chem]: 1.5,
                     [Subject.Phys]: 1.5,
                 }),
-                multiplySome(1.5, {
+                multiplySome(1, {
                     [Subject.Maths]: 1.5,
                     [Subject.M1]: 1.5,
                     [Subject.M2]: 1.5,
@@ -805,6 +851,43 @@ export const cuhkProgrammes: Programme[] = [
         ),
     },
     {
+        id: "JS4470",
+        mapGrades,
+        requirement: select(
+            minimum({
+                [Subject.Chi]: 3,
+                [Subject.Eng]: 3,
+                [Subject.Maths]: 3,
+                [Subject.CS]: 1,
+            }),
+            minimumOne(
+                [
+                    Subject.M1,
+                    Subject.M2,
+                    Subject.Bio,
+                    Subject.Chem,
+                    Subject.Phys,
+                    Subject.ICT,
+                ],
+                3,
+            ),
+            catAorC3,
+        ),
+        weighting: sequence(
+            cuhkConfig,
+            modify(
+                multiply({
+                    [Subject.Maths]: 1.25,
+                    [Subject.M1]: 1.25,
+                    [Subject.M2]: 1.25,
+                    [Subject.Chem]: 1.25,
+                    [Subject.Phys]: 1.25,
+                }),
+            ),
+            chooseBest(5),
+        ),
+    },
+    {
         id: "JS4501",
         mapGrades: mapGradesMedic,
         requirement: rMedic,
@@ -842,7 +925,22 @@ export const cuhkProgrammes: Programme[] = [
         id: "JS4537",
         mapGrades,
         requirement: r332_33,
-        weighting: sequence(cuhkConfig, chooseBest(5)),
+        weighting: sequence(
+            cuhkConfig,
+            modify(
+                multiply({
+                    [Subject.Eng]: 1.5,
+                    [Subject.Maths]: 1.5,
+                }),
+                multiplySome(1, {
+                    [Subject.Bio]: 1.5,
+                    [Subject.Chem]: 1.5,
+                    [Subject.Econ]: 1.5,
+                    [Subject.HMSC]: 1.5,
+                }),
+            ),
+            chooseBest(5),
+        ),
     },
     {
         id: "JS4542",
@@ -886,7 +984,7 @@ export const cuhkProgrammes: Programme[] = [
             minimum({
                 [Subject.Chi]: 3,
                 [Subject.Eng]: 3,
-                [Subject.Maths]: 3,
+                [Subject.Maths]: 2,
                 [Subject.CS]: 1,
             }),
             minimumOne(
@@ -942,7 +1040,7 @@ export const cuhkProgrammes: Programme[] = [
                     Subject.Phys,
                     Subject.Geog,
                 ],
-                3,
+                4,
             ),
             catA3,
         ),
@@ -1127,13 +1225,11 @@ export const cuhkProgrammes: Programme[] = [
             modify(
                 multiply({
                     [Subject.Maths]: 1.5,
-                    [Subject.M1]: 1.5,
-                    [Subject.M2]: 1.5,
+                    [Subject.M1]: 2,
+                    [Subject.M2]: 2,
                 }),
                 multiplySome(1, {
-                    [Subject.Phys]: 1.5,
                     [Subject.Econ]: 1.5,
-                    [Subject.BAFS]: 1.5,
                     [Subject.ICT]: 1.5,
                 }),
             ),
