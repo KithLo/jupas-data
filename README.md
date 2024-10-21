@@ -19,7 +19,7 @@
 
 Programme requirements / weightings: HKBU (new subjects TBC), HKUST (new subjects TBC), LingnanU, SSSDP
 
-Admission scores 2024: EduHK, HKU, SSSDP
+Admission scores 2024: HKU, SSSDP
 
 Category C score conversion: LingnanU, SSSDP
 
