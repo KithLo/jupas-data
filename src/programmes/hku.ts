@@ -5,12 +5,7 @@ import {
     mapCatC_hku,
     mapPassFail,
 } from "../mapGrades"
-import {
-    minimum,
-    minimumOne,
-    requireMultiple,
-    unknownRequirement,
-} from "../requirements"
+import { minimum, minimumOne, requireMultiple } from "../requirements"
 import {
     categoryASubjects,
     categoryCSubjects,
@@ -29,7 +24,6 @@ import {
     multiply,
     multiplyAll,
     multiplySome,
-    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -357,8 +351,12 @@ export const hkuProgrammes: Programme[] = [
     {
         id: "JS6274",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(hku343, hkuElectiveReq, hkuElectiveReq),
+        weighting: sequence(
+            hkuConfig,
+            modify(multiply({ [Subject.Eng]: 2 })),
+            select(choose(Subject.Eng), chooseBest(4)),
+        ),
     },
     {
         id: "JS6286",
@@ -376,32 +374,56 @@ export const hkuProgrammes: Programme[] = [
     {
         id: "JS6303",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            hku344,
+            minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
+            hkuElectiveReq,
+        ),
+        weighting: engg,
+        reference: "JS6963",
     },
     {
         id: "JS6315",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            hku333,
+            minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
+            hkuElectiveReq,
+        ),
+        weighting: engg,
+        reference: "JS6951",
     },
     {
         id: "JS6339",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            hku333,
+            minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
+            hkuElectiveReq,
+        ),
+        weighting: engg,
+        reference: "JS6963",
     },
     {
         id: "JS6353",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            hku333,
+            minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
+            hkuElectiveReq,
+        ),
+        weighting: engg,
+        reference: "JS6963",
     },
     {
         id: "JS6377",
         mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
+        requirement: select(
+            hku344,
+            minimumOne([Subject.Bio, Subject.Chem, Subject.Phys], 3),
+            hkuElectiveReq,
+        ),
+        weighting: engg,
     },
     {
         id: "JS6406",
@@ -819,12 +841,6 @@ export const hkuProgrammes: Programme[] = [
             hkuElectiveReq,
         ),
         weighting: sequence(discardCategoryC, hkuConfig, chooseBest(6)),
-    },
-    {
-        id: "JS6999",
-        mapGrades,
-        requirement: unknownRequirement,
-        weighting: unknownWeighting,
     },
     {
         id: "JS6999",
