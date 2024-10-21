@@ -5,7 +5,12 @@ import {
     mapCatC_hku,
     mapPassFail,
 } from "../mapGrades"
-import { minimum, minimumOne, requireMultiple } from "../requirements"
+import {
+    minimum,
+    minimumOne,
+    requireMultiple,
+    unknownRequirement,
+} from "../requirements"
 import {
     categoryASubjects,
     categoryCSubjects,
@@ -24,6 +29,7 @@ import {
     multiply,
     multiplyAll,
     multiplySome,
+    unknownWeighting,
 } from "../weightings"
 
 const mapGrades = createMapGrades([
@@ -349,6 +355,12 @@ export const hkuProgrammes: Programme[] = [
         weighting: sequence(hkuConfig, catCorM12, chooseBest(5)),
     },
     {
+        id: "JS6274",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
         id: "JS6286",
         mapGrades,
         requirement: select(hku333, hkuElectiveReq, hkuElectiveReq),
@@ -360,6 +372,36 @@ export const hkuProgrammes: Programme[] = [
         requirement: select(hku333, hkuElectiveReq, hkuElectiveReq),
         weighting: artWeighting,
         reference: "JS6286",
+    },
+    {
+        id: "JS6303",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS6315",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS6339",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS6353",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
+    },
+    {
+        id: "JS6377",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS6406",
@@ -777,6 +819,12 @@ export const hkuProgrammes: Programme[] = [
             hkuElectiveReq,
         ),
         weighting: sequence(discardCategoryC, hkuConfig, chooseBest(6)),
+    },
+    {
+        id: "JS6999",
+        mapGrades,
+        requirement: unknownRequirement,
+        weighting: unknownWeighting,
     },
     {
         id: "JS6999",

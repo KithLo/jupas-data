@@ -61,22 +61,44 @@ JS6250:
   - Medicine
   - Science
   - SocialSciences
+JS6274:
+  - Arts
+  - Business
+  - Communication
+  - SocialSciences
 JS6286:
   - AI
   - Arts
-  - Computing
   - Communication
+  - Computing
   - Education
   - Music
   - Philosophy
 JS6298:
   - AI
   - Arts
-  - Computing
   - Communication
+  - Computing
   - Education
-  - Music
+  - Engineering
   - Philosophy
+  - Science
+  - SocialPolicy
+JS6303:
+  - Building
+  - Computing
+  - Engineering
+JS6315:
+  - Computing
+  - Engineering
+JS6339:
+  - Engineering
+JS6353:
+  - Engineering
+JS6377:
+  - Building
+  - Computing
+  - Engineering
 JS6406:
   - Law
 JS6418:
@@ -90,6 +112,9 @@ JS6482:
 JS6494:
   - Medicine
 JS6602:
+  - AI
+  - Computing
+  - Engineering
   - Science
 JS6688:
   - Science
@@ -114,6 +139,12 @@ JS6755:
   - Business
 JS6767:
   - Business
+JS6779:
+  - AI
+  - Business
+  - Computing
+  - Medicine
+  - Science
 JS6781:
   - Business
 JS6793:
@@ -147,7 +178,6 @@ JS6925:
   - Engineering
   - Medicine
 JS6937:
-  - Building
   - Business
   - Computing
   - Engineering
@@ -155,6 +185,10 @@ JS6937:
 JS6949:
   - Medicine
   - Science
+JS6987:
+  - Computing
+  - Engineering
 JS6999:
   - AI
   - Computing
+  - Engineering
